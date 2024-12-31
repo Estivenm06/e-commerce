@@ -1,8 +1,5 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 
-export default {
-    BACKEND_URL: process.env.BACKEND_URL,
-    PORT: process.env.PORT || '3001',
-    SECRET: process.env.SECRET
-}
+export const DATABASE_URL = process.env.DATABASE_URL;
+export const PORT = process.env.PORT || 3001;
+export const SECRET = process.env.SECRET;
