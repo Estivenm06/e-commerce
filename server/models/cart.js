@@ -1,7 +1,7 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../utils/db";
-import User from "./user";
-import Product from "./product";
+const User = require("./user.js");
+const Product = require("./product.js");
+const { sequelize } = require("../utils/db.js");
+const { Model, DataTypes } = require("sequelize");
 
 class Cart extends Model {}
 Cart.init(
@@ -18,29 +18,19 @@ Cart.init(
     },
     date: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      defaultValue: new Date().getTime(),
       allowNull: false,
     },
-    products: [
-      {
-        productId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          references: { model: Product, key: "id" },
-        },
-        quantity: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
-      },
-    ],
+    products: {
+      type: DataTypes.JSON,
+    },
   },
   {
     sequelize,
     underscored: true,
-    timestamps: false,
+    timestamps: true,
     modelName: "carts",
   }
 );
 
-export default Cart;
+module.exports = Cart;

@@ -1,9 +1,12 @@
-import {PORT} from './utils/config.js'
-import express from "express";
-import { connectToDatabase } from "./utils/db.js";
-import 'express-async-errors'
+const {PORT} = require('./utils/config.js')
+const express = require('express')
+require('express-async-errors')
+const {connectToDatabase} = require('./utils/db.js')
+//Routers
+const productsRouter = require('./controllers/productsRouter.js')
 const app = express();
 app.use(express.json());
+app.use('/api/products', productsRouter)
 
 const startServer = async () => {
   try {

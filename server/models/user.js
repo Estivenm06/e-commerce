@@ -1,13 +1,13 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../utils/db";
+const { sequelize } = require("../utils/db.js");
+const { Model, DataTypes } = require("sequelize");
 
 class User extends Model {}
 User.init(
   {
     id: {
-      tyep: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     username: {
       type: DataTypes.TEXT,
@@ -23,53 +23,21 @@ User.init(
       unique: true,
     },
     name: {
-      firstname: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      lastname: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
+      type: DataTypes.JSON,
     },
     phone: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
     address: {
-      geolocalation: {
-        lat: {
-          type: DataTypes.TEXT,
-          allowNull: false,
-        },
-        long: {
-          type: DataTypes.TEXT,
-          allowNull: false,
-        },
-      },
-      city: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      street: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      number: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      zipcode: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
+      type: DataTypes.JSON,
     },
   },
   {
     sequelize,
     underscored: true,
-    timestamps: true,
+    timestamps: false,
     modelName: "users",
   }
 );
 
-export default User;
+module.exports = User;

@@ -1,17 +1,5 @@
-import Category from './category'
-import Product from './product'
-import User from './user'
-import Cart from './cart'
+const User = require('./user.js')
+const Cart = require('./cart.js')
+const Product = require('./product.js')
 
-Product.belongsTo(Category)
-Category.hasMany(Product)
-User.hasMany(Product)
-
-Product.belongsTo(User, {through: Cart})
-
-Category.sync({})
-Product.sync({})
-User.sync({})
-Cart.sync({})
-
-export default {Category, Product, User, Cart}
+module.exports = { Product, User, Cart}

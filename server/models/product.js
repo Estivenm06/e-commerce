@@ -1,6 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import {sequelize} from '../utils/db'
-import Category from "./category";
+const {Model, DataTypes} = require('sequelize')
+const {sequelize} = require('../utils/db.js')
 
 class Product extends Model {}
 Product.init({
@@ -10,7 +9,7 @@ Product.init({
         autoIncrement: true,
     },
     title: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     price: {
@@ -19,27 +18,18 @@ Product.init({
     },
     description: {
         type: DataTypes.TEXT,
-        allowNull: false,
     },
     category: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
-        references: {model: Category, key: 'name'}
     },
     image: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     rating: {
-        rate: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-        },
-        count: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        }
+        type: DataTypes.JSON,
     }
-}, {sequelize, underscored: true, timestamps: false, tableName: 'product'})
+}, {sequelize, underscored: true, timestamps: false, tableName: 'products'})
 
-export default Product
+module.exports = Product
