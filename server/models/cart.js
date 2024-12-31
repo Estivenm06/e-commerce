@@ -1,6 +1,5 @@
 const User = require("./user.js");
-const Product = require("./product.js");
-const { sequelize } = require("../utils/db.js");
+const { sequelize } = require("../utils/config.js");
 const { Model, DataTypes } = require("sequelize");
 
 class Cart extends Model {}

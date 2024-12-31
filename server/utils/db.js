@@ -1,17 +1,10 @@
-const pg = require('pg')
-const {Sequelize} = require('sequelize')
-const {DATABASE_URL} = require('./config.js')
-const {SequelizeStorage, Umzug} = require('umzug')
-
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectModule: pg,
-  dialect: "postgres",
-});
+const { SequelizeStorage, Umzug } = require("umzug");
+const { sequelize } = require("./config.js");
 
 const migrationConf = {
-  migrations: { glob: './server/migrations/*.js' },
+  migrations: { glob: "./server/migrations/*.js" },
   context: sequelize.getQueryInterface(),
-  storage: new SequelizeStorage({sequelize, tableName: 'migrations'}),
+  storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
   logger: console,
 };
 
@@ -26,7 +19,7 @@ const runMigration = async () => {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
-    await runMigration()
+    await runMigration();
     console.log("You have been successfully connected to the database.");
   } catch (error) {
     console.log("A error has occurred trying to connect to the database.");
@@ -34,4 +27,4 @@ const connectToDatabase = async () => {
   }
 };
 
-module.exports= {sequelize, connectToDatabase, runMigration}
+module.exports = { connectToDatabase };

@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize')
-const {sequelize} = require('../utils/db.js')
+const {sequelize} = require('../utils/config.js')
 
 class Product extends Model {}
 Product.init({
@@ -17,7 +17,7 @@ Product.init({
         allowNull: false,
     },
     description: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(1000),
     },
     category: {
         type: DataTypes.STRING,

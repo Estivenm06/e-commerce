@@ -1,4 +1,7 @@
 const { DataTypes } = require("sequelize");
+const { Product } = require("../models");
+const axios = require("axios");
+const { API } = require("../utils/config.js");
 
 const up = async ({ context: queryInterface }) => {
   await queryInterface.createTable("users", {
@@ -8,11 +11,11 @@ const up = async ({ context: queryInterface }) => {
       primaryKey: true,
     },
     username: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
@@ -45,7 +48,7 @@ const up = async ({ context: queryInterface }) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1000),
     },
     category: {
       type: DataTypes.STRING,
@@ -79,12 +82,27 @@ const up = async ({ context: queryInterface }) => {
         type: DataTypes.JSON,
       },
     });
+  try {
+    const {data} = await axios.get(`${API}/products`)
+    await Product.bulkCreate(data.map(({id, ...product}) => product))
+    console.log('Products successfully added to database');
+  } catch (error) {
+    console.log('Error adding products: ',error);
+    throw error;
+  }
 };
 
 const down = async ({ context: queryInterface }) => {
   await queryInterface.dropTable("users");
   await queryInterface.dropTable("products");
   await queryInterface.dropTable("carts");
+  try {
+    await Product.destroy({ where: {} });
+    console.log("Products successfully removed from the database");
+  } catch (error) {
+    console.log("Error removing products", error);
+    throw error;
+  }
 };
 
 module.exports = { up, down };
