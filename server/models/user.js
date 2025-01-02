@@ -19,8 +19,6 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
     name: {
       type: DataTypes.JSON,
@@ -31,6 +29,9 @@ User.init(
     address: {
       type: DataTypes.JSON,
     },
+    passwordHash: {
+      type: DataTypes.STRING
+    }
   },
   {
     sequelize,

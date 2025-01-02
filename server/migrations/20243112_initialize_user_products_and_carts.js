@@ -20,8 +20,6 @@ const up = async ({ context: queryInterface }) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
     name: {
       type: DataTypes.JSON,
@@ -32,6 +30,9 @@ const up = async ({ context: queryInterface }) => {
     address: {
       type: DataTypes.JSON,
     },
+    password_hash: {
+      type: DataTypes.STRING,
+    }
   });
   await queryInterface.createTable("products", {
     id: {
