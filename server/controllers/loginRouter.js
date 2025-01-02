@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Active } = require("../models");
 const bcrypt = require("bcrypt");
 const { SECRET } = require("../utils/config.js");
 
@@ -31,9 +31,21 @@ router.post("/", async (req, res) => {
 
   const token = jwt.sign(userForToken, SECRET, { expiresIn: 60 * 60 });
 
+  const isActive = await Active.findOne({where: {userId: user.id}})
+  
+  if(isActive){
+    return res.status(401).json({error: 'The user is currently active.'})
+  }
+
+  const active = await Active.create({userId: user.id, active: true})
+  
+  if(!active){
+    return res.status(401).json({error: 'This user cannot be active.'})
+  }
+
   return res
     .status(201)
-    .json({ token, username: user.username, name: user.name });
+    .json({ token, username: user.username, name: user.name, active: true });
 });
 
 module.exports = router;

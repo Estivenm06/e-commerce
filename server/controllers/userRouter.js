@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Active} = require("../models");
 const bcrypt = require("bcrypt");
 const { tokenExtractor } = require("../utils/middleware.js");
 
@@ -35,6 +35,10 @@ router.put("/:id", tokenExtractor, async (req, res) => {
   try {
     const { id, ...body } = req;
     const user = await User.findByPk(req.decodedToken.id);
+    const isActive = await Active.findOne({where: {userId: user.id}})
+    if(!isActive){
+      return res.status(401).json({error: 'This user is not active.'})
+    }
     if (!user) {
       return res.status(401).json({ error: "User not found it." });
     }
@@ -51,6 +55,10 @@ router.put("/:id", tokenExtractor, async (req, res) => {
 router.delete("/:id", tokenExtractor, async (req, res) => {
   try {
     const user = await User.findByPk(req.decodedToken.id);
+    const isActive = await Active.findOne({where: {userId: user.id}})
+    if(!isActive){
+      return res.status(401).json({error: 'This user is not active.'})
+    }
     if (!user) {
       return res.status(401).json({ error: "User not found it." });
     }
