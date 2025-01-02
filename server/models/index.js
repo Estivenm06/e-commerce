@@ -5,4 +5,4 @@ const Product = require('./product.js')
 Cart.belongsTo(User)
 User.hasMany(Cart)
 
-module.exports = { Product, User, Cart}
+module.exports = { Product, User, Cart }

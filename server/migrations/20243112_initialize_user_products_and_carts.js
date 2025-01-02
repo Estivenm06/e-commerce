@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { Product } = require("../models");
+const { Product, Category } = require("../models");
 const axios = require("axios");
 const { API } = require("../utils/config.js");
 
@@ -51,8 +51,8 @@ const up = async ({ context: queryInterface }) => {
       type: DataTypes.STRING(1000),
     },
     category: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING(),
+      allowNull: false
     },
     image: {
       type: DataTypes.STRING,
@@ -61,33 +61,33 @@ const up = async ({ context: queryInterface }) => {
     rating: {
       type: DataTypes.JSON,
     },
-  }),
-    await queryInterface.createTable("carts", {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: "users", key: "id" },
-      },
-      date: {
-        type: DataTypes.DATE,
-        defaultValue: new Date().getTime(),
-        allowNull: false,
-      },
-      products: {
-        type: DataTypes.JSON,
-      },
-    });
+  });
+  await queryInterface.createTable("carts", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: "users", key: "id" },
+    },
+    date: {
+      type: DataTypes.DATE,
+      defaultValue: new Date().getTime(),
+      allowNull: false,
+    },
+    products: {
+      type: DataTypes.JSON,
+    },
+  });
   try {
-    const {data} = await axios.get(`${API}/products`)
-    await Product.bulkCreate(data.map(({id, ...product}) => product))
-    console.log('Products successfully added to database');
+      const { data } = await axios.get(`${API}/products`);
+      await Product.bulkCreate(data.map(({ id, ...product }) => product));
+      console.log("Products successfully added to database");
   } catch (error) {
-    console.log('Error adding products: ',error);
+    console.log("Error adding products: ", error);
     throw error;
   }
 };
