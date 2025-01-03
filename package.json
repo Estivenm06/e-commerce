@@ -12,6 +12,11 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource-variable/montserrat": "^5.1.1",
+    "@fontsource/roboto": "^5.1.1",
+    "@mui/material": "^6.3.0",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "express": "^4.21.2",
@@ -44,6 +49,7 @@
     "sass": "^1.83.0",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
+    "url-loader": "^4.1.1",
     "vite": "^6.0.7",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",

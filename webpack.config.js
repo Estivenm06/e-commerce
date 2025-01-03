@@ -1,14 +1,21 @@
 const path = require("path");
 
 module.exports = {
-  entry: './client/index.js',
+  entry: "./client/index.js",
   output: {
     path: path.join(__dirname, "/client/dist"),
     filename: "index.bundle.js",
   },
   devServer: {
     port: 3002,
-    static: path.resolve(__dirname, './client/src')
+    static: path.resolve(__dirname, "./client/src"),
+  },
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "./client/src/components"),
+      "@styles": path.resolve(__dirname, "./client/src/styles"),
+    },
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -20,7 +27,8 @@ module.exports = {
         },
       },
       {
-        test: /\.sass$/,
+        test: /\.scss$/,
+        exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
