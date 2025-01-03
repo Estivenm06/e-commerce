@@ -1,8 +1,8 @@
-require('file-loader?name=[name].[ext]!../index.html')
+import('file-loader?name=[name].[ext]!../index.html')
 import { StrictMode } from 'react';
 import {createRoot} from 'react-dom/client'
-import React from 'react';
 import {App} from './src/App.jsx'
+import React from "react";
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement)

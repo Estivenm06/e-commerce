@@ -1,10 +1,10 @@
-import React from "react";
 import { Container } from "@mui/material";
+import React from "react";
 
 const Content = () => {
     return(
     <>
-    <Container maxWidth={false} sx={{backgroundColor: 'lile', padding: '16%', backgroundColor: 'grey'}} disableGutters>
+    <Container maxWidth={false} sx={{ padding: '16%', backgroundColor: 'grey'}} disableGutters>
     This is the content
     </Container>
     </>
