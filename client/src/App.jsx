@@ -9,14 +9,14 @@ export const App = () => {
   return (
     <>
       <CssBaseline />
-        <Container maxWidth={false} disableGutters>
-          <Menu />
-          <Divider/>
-          <Header />
-          <Divider/>
-          <Content />
-          <Divider/>
-        </Container>
+      <Container maxWidth={false} disableGutters>
+        <Menu />
+        <Divider />
+        <Header />
+        <Divider />
+        <Content />
+        <Divider />
+      </Container>
     </>
   );
 };
