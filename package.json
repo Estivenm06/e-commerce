@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server/index.js",
+    "dev": "node ./server/index.js",
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "eslint ."
@@ -21,6 +21,7 @@
     "@mui/material": "^6.3.0",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^9.0.2",

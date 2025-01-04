@@ -2,6 +2,7 @@ const {PORT} = require('./utils/config.js')
 const express = require('express')
 require('express-async-errors')
 const {connectToDatabase} = require('./utils/db.js')
+const cors = require('cors')
 //Routers
 const productRouter = require('./controllers/productRouter.js')
 const userRouter = require('./controllers/userRouter.js')
@@ -11,6 +12,7 @@ const logoutRouter = require('./controllers/logoutRouter.js')
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/carts', cartRouter)

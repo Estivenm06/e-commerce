@@ -45,7 +45,6 @@ const Search = ({ visibility, ttrue, tfalse }) => {
 
 export const Right = () => {
   const [visibility, setVisibility] = useState(false);
-  console.log(visibility);
 
   const toggleVisibilityTrue = () => {
     setVisibility(true);

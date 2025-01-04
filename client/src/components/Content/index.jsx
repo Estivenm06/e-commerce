@@ -1,7 +1,12 @@
 import { Container, Typography, Box, Button } from "@mui/material";
 import React from "react";
 
-const Content = () => {
+const Content = ({products}) => {
+  if(!products){
+    return;
+  }
+  const mostRated = products.find(product => Math.max(product.rating.rate))
+  console.log(mostRated);
   return (
     <Container
       maxWidth={false}
