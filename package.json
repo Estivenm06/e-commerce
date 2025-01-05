@@ -7,12 +7,13 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./server/index.js",
+    "dev": "nodemon ./server/index.js",
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.21.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fontsource-variable/montserrat": "^5.1.1",

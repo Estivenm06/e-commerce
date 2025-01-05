@@ -6,11 +6,11 @@ const Content = ({products}) => {
     return;
   }
   const mostRated = products.find(product => Math.max(product.rating.rate))
-  console.log(mostRated);
+
   return (
     <Container
       maxWidth={false}
-      sx={{ padding: "18%", backgroundColor: "#FFF5DA", display: "flex" }}
+      sx={{ padding: '7%',paddingInline: '16%', backgroundColor: "#FFF5DA", display: "flex"}}
       disableGutters
     >
       <Box sx={{ display: "flex", flexDirection: "column", rowGap: "1.5em", width: '50%' }}>
@@ -32,6 +32,8 @@ const Content = ({products}) => {
               padding: "1em",
               paddingInline: "3.5em",
               borderRadius: "2em",
+              backgroundColor: '#F2CC05',
+              color: 'white'
             }}
           >
             <Typography variant="button">shop now</Typography>
@@ -41,14 +43,14 @@ const Content = ({products}) => {
       <Box
         sx={{
           display: "flex",
-          backgroundColor: "grey",
           width: '100%',
           justifyContent: "center",
           alignItems: "center",
           flexGrow: "1",
         }}
       >
-        PHOTO
+          <img className="mostRated" src={mostRated?.image} alt="Most rated" height={'450px'} />
+
       </Box>
     </Container>
   );
