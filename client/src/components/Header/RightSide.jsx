@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, TextField, Button, Typography, IconButton } from "@mui/material";
+import { Box, Button, Typography, IconButton, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -19,8 +19,15 @@ const Search = ({ visibility, ttrue, tfalse }) => {
           size="small"
           color="none"
           label={<SearchIcon />}
-          onMouseOut={() => tfalse()}
+          onMouseLeave={() => tfalse()}
           sx={{
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "flex",
+              xl: "flex",
+            },
             width: "100%",
             right: "0.5em",
             cursor: "pointer",
@@ -29,11 +36,17 @@ const Search = ({ visibility, ttrue, tfalse }) => {
         />
       ) : (
         <IconButton
-          onMouseOver={() => ttrue()}
+          onMouseEnter={() => ttrue()}
           sx={{
             width: "100%",
             height: "100%",
-            display: "flex",
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "flex",
+              xl: "flex",
+            },
             justifyContent: "end",
             alignItems: "center",
             margin: "auto",
@@ -71,7 +84,32 @@ export const Right = () => {
           ttrue={toggleVisibilityTrue}
           tfalse={toggleVisibilityFalse}
         />
-        <Box sx={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
+            <TextField
+              size="small"
+              color="none"
+              sx={{
+                cursor: "pointer",
+                transition: "0.5s",
+                display: {
+                  xs: "flex",
+                  sm: "flex",
+                  md: "flex",
+                  lg: "none",
+                  xl: "none",
+                },
+                justifyContent: "end",
+                alignItems: "center",
+              }}
+              label={<SearchIcon />}
+            />
+        <Box
+          sx={{
+            display: "flex",
+            gap: "0.5em",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Button
             size="small"
             disableElevation
@@ -82,15 +120,74 @@ export const Right = () => {
               borderRadius: "2em",
               color: "primary",
               transition: "0.5s",
+              display: {
+                xs: "none",
+                sm: "none",
+                md: "none",
+                lg: "block",
+                xl: "block",
+              },
             }}
-            children={<Typography variant="button" children="LOG IN" />}
+            children={
+              <Typography
+                variant="button"
+                children="LOG IN"
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "none",
+                    lg: "block",
+                    xl: "block",
+                  },
+                }}
+              />
+            }
           />
           <IconButton
-            children={<Typography color="black" children="SIGN UP" />}
+            children={
+              <Typography
+                color="black"
+                children="SIGN UP"
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "none",
+                    lg: "block",
+                    xl: "block",
+                  },
+                }}
+              />
+            }
           />
-          <IconButton children={<FavoriteIcon sx={{ color: "orange" }} />} />
           <IconButton
-            children={<ShoppingCartIcon sx={{ color: "orange" }} />}
+            children={<FavoriteIcon sx={{ color: "orange" }} />}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "none",
+                md: "none",
+                lg: "block",
+                xl: "block",
+              },
+            }}
+          />
+          <IconButton
+            children={
+              <ShoppingCartIcon
+                sx={{
+                  color: "orange",
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "none",
+                    lg: "block",
+                    xl: "block",
+                  },
+                }}
+              />
+            }
           />
         </Box>
       </Box>

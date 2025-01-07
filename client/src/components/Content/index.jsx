@@ -10,14 +10,14 @@ const Content = ({ products }) => {
   return (
     <Container
       maxWidth={false}
-      sx={{ backgroundColor: "#FFF5DA", py: 4 }}
+      sx={{ backgroundColor: "#FFF5DA", py: 4}}
       disableGutters
     >
       <Grid
         container
         sx={{
           padding: "2em",
-          paddingLeft: { sm: "25%", md: "25%", lg: "15em", xl: "15em" },
+          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "auto", xl: "15em"},
           margin: "auto",
         }}
       >

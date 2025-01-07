@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "@mui/material";
 import { Right } from "./RightSide.jsx";
 import { Left } from "./LeftSide.jsx";
-// sx: PhoneScreen, md: TabletScreen, lg: LaptopScreen, xl: DesktopScreen
+// sx: PhoneScreen, md: TabletScreen, lg: LaptopScreen, xl: DesktopScreen, sm: TabletScreen
 
 const Header = () => {
   return (
@@ -13,7 +13,8 @@ const Header = () => {
           display: "flex",
           justifyContent: "space-evenly",
           alignItems: "center",
-          paddingInline: { xs: "2em", sm: "2em", md: "15em", lg: "15em", xl: "15em" },
+          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "5em", xl: "15em" },
+          margin: 'auto'
         }}
         maxWidth='xl'
         disableGutters

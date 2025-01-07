@@ -24,7 +24,7 @@ export const App = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth={false} disableGutters>
+      <Container maxWidth={false} disableGutters sx={{display: 'block', overflow: 'hidden'}}>
         <Menu />
         <Divider />
         <Header />
