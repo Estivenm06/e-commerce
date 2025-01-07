@@ -7,7 +7,6 @@ import { Right } from "./RightSide";
 const Content = ({ products }) => {
   if (!products || products.length === 0) return null;
   const mostRated = products.find((product) => Math.max(product.rating.rate));
-  // xs: PhoneScreen, sm: TabletScreen, md: LaptopScreen, lg: DesktopScreen, xl: LargeDesktopScreen
   return (
     <Container
       maxWidth={false}
@@ -66,31 +65,5 @@ const Content = ({ products }) => {
     </Container>
   );
 };
-/*
-      <Grid
-        container
-        spacing={2}
-        sx={{
-            py: 4,
-            backgroundColor: "#FFF5DA",
-          padding: { xs: "2%", sm: "4%", md: "7%" },
-        }}
-      >
-        <Grid xs={2} sm={2} md={2} lg={2} >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: 'start',
-              py: 2
-            }}
-          >
-          </Box>
-          <Box sx={{ height: "100%" }}>
-          </Box>
-        </Grid>
-      </Grid>
-<Left />
-<Right mostRated={mostRated} />
-*/
+
 export default Content;

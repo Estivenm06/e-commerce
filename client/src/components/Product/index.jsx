@@ -23,6 +23,7 @@ const Index = ({ products }) => {
         justifyContent: "center",
         alignItems: "center",
         paddingTop: "7%",
+        paddingInline: { xs: "2em", sm: "2em", md: "15em", lg: "15em", xl: "15em" },
       }}
     >
       <Header toggleFeature={toggleFeature} />

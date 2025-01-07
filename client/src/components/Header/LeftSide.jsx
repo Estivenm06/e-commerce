@@ -4,13 +4,23 @@ import { Box, Typography } from "@mui/material";
 export const Left = () => {
   return (
     <>
-      LOGO
+      <img
+        src={"../../resources/LOGO.webp"}
+        alt="LOGO"
+        style={{
+          padding: '0.5em',
+          width: "70px",
+          height: "70px",
+          borderRadius: "50%",
+          border: "1px solid orange",
+        }}
+      />
       <Box sx={{ display: "flex", gap: "1.5em" }}>
-        <Typography sx={{ color: "orange" }}>HOME</Typography>
-        <Typography>SHOP</Typography>
-        <Typography>COLLECTIONS</Typography>
-        <Typography>PAGES</Typography>
-        <Typography>CONTACT</Typography>
+        <Typography className="textHeader">HOME</Typography>
+        <Typography className="textHeader">SHOP</Typography>
+        <Typography className="textHeader">COLLECTIONS</Typography>
+        <Typography className="textHeader">PAGES</Typography>
+        <Typography className="textHeader">CONTACT</Typography>
       </Box>
     </>
   );
