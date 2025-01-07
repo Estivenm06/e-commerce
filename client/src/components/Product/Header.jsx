@@ -27,14 +27,12 @@ export const Header = ({toggleFeature}) => {
           columns={{ xs: 0, sm: 9, md: 12 }}
           marginTop={'10%'}
         >
-          <Grid size={{xs: 1, sm: 3, md: 4}}>
+          <Grid xs={1} sm={3} md={4}>
+            <Box sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
             <Button className="buttonProduct" onClick={() => toggleFeature('recentListed')}>Recent Listed</Button>
-          </Grid>
-          <Grid size={{xs: 1, sm: 3, md: 4}}>
             <Button className="buttonProduct" onClick={() => toggleFeature('lowerPrices')}>Lower Prices</Button>
-          </Grid>
-          <Grid size={{xs: 1, sm: 3, md: 4}}>
             <Button className="buttonProduct" onClick={() => toggleFeature('topFeatured')}>Top Featured</Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>
