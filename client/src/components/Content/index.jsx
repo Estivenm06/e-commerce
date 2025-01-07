@@ -1,59 +1,96 @@
-import { Container, Typography, Box, Button } from "@mui/material";
 import React from "react";
+import { Box, Container } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { Left } from "./LeftSide";
+import { Right } from "./RightSide";
 
-const Content = ({products}) => {
-  if(!products){
-    return;
-  }
-  const mostRated = products.find(product => Math.max(product.rating.rate))
-
+const Content = ({ products }) => {
+  if (!products || products.length === 0) return null;
+  const mostRated = products.find((product) => Math.max(product.rating.rate));
+  // xs: PhoneScreen, sm: TabletScreen, md: LaptopScreen, lg: DesktopScreen, xl: LargeDesktopScreen
   return (
     <Container
       maxWidth={false}
-      sx={{ padding: '7%',paddingInline: '16%', backgroundColor: "#FFF5DA", display: "flex"}}
+      sx={{ backgroundColor: "#FFF5DA", py: 4 }}
       disableGutters
     >
-      <Box sx={{ display: "flex", flexDirection: "column", rowGap: "1.5em", width: '50%' }}>
-        <Box>
-          <Typography variant="body1">We are Ɲova</Typography>
-          <Typography variant="h3">Style Your Own Way wtih Ɲova</Typography>
-        </Box>
-        <Typography>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui deleniti
-          consequatur sed quam dolor fugiat, necessitatibus maxime porro
-          distinctio harum obcaecati laboriosam deserunt. Commodi nulla vero,
-          laboriosam libero modi facilis?
-        </Typography>
-        <Box>
-          <Button
-            sx={{
-              backgroundColor: "white",
-              display: "flex",
-              padding: "1em",
-              paddingInline: "3.5em",
-              borderRadius: "2em",
-              backgroundColor: '#F2CC05',
-              color: 'white'
-            }}
-          >
-            <Typography variant="button">shop now</Typography>
-          </Button>
-        </Box>
-      </Box>
-      <Box
+      <Grid
+        container
         sx={{
-          display: "flex",
-          width: '100%',
-          justifyContent: "center",
-          alignItems: "center",
-          flexGrow: "1",
+          padding: "2em",
+          paddingLeft: { sm: "25%", md: "25%", lg: "15em", xl: "15em" },
+          margin: "auto",
         }}
       >
-          <img className="mostRated" src={mostRated?.image} alt="Most rated" height={'450px'} />
-
-      </Box>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "auto",
+            maxWidth: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+              maxWidth: {
+                xs: "100%",
+                sm: "40%",
+                md: "40%",
+                lg: "40%",
+                xl: "40%",
+              },
+            }}
+          >
+            <Left />
+          </Box>
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                sm: "flex",
+                md: "flex",
+                lg: "flex",
+                xl: "flex",
+              },
+              margin: "auto",
+            }}
+          >
+            <Right mostRated={mostRated} />
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 };
-
+/*
+      <Grid
+        container
+        spacing={2}
+        sx={{
+            py: 4,
+            backgroundColor: "#FFF5DA",
+          padding: { xs: "2%", sm: "4%", md: "7%" },
+        }}
+      >
+        <Grid xs={2} sm={2} md={2} lg={2} >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: 'start',
+              py: 2
+            }}
+          >
+          </Box>
+          <Box sx={{ height: "100%" }}>
+          </Box>
+        </Grid>
+      </Grid>
+<Left />
+<Right mostRated={mostRated} />
+*/
 export default Content;

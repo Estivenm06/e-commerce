@@ -46,7 +46,7 @@ export const Product = ({ products, feature }) => {
   }
 
   return (
-    <Grid container spacing={1} sx={{ marginTop: '2em', marginBottom: '2em', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Grid container spacing={1} sx={{ py: '2em', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {filteredProducts.map((item) => (
             <Grid xs={12} sm={6} md={4} key={item.id}>
                 <Box sx={{ padding: '0.5em',border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>

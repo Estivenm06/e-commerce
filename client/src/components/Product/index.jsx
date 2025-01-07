@@ -1,20 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Header } from "./Header";
 import { Container } from "@mui/material";
 import { Product } from "./Product";
 
 const Index = ({ products }) => {
-  const [feature, setFeature] = useState('recentListed')
+  const [feature, setFeature] = useState("recentListed");
   if (!products) {
     return;
   }
 
   const toggleFeature = (option) => {
-    setFeature(option)
-  }
+    setFeature(option);
+  };
 
   return (
-  <Container
+    <Container
       maxWidth={false}
       disableGutters
       sx={{
@@ -25,8 +25,8 @@ const Index = ({ products }) => {
         paddingTop: "7%",
       }}
     >
-        <Header toggleFeature={toggleFeature} />
-        <Product products={products} feature={feature}/>
+      <Header toggleFeature={toggleFeature} />
+      <Product products={products} feature={feature} />
     </Container>
   );
 };
