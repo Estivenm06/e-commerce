@@ -1,7 +1,8 @@
-@use './menu.scss';
-@use './header.scss';
+@use "./menu.scss";
+@use "./header.scss";
+@use "./content.scss";
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
