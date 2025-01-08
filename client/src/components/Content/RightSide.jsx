@@ -7,7 +7,7 @@ export const Right = ({ mostRated }) => {
           src={`${mostRated.image}?w=248&fit=crop&auto=format`}
           srcSet={`${mostRated.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
           alt={mostRated.title}
-         style={{ width: "auto", height: "380px", objectFit: "fill"}}
+         style={{ width: "100%", height: "380px", objectFit: "fill"}}
         />
   );
 };

@@ -11,7 +11,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-// xs: PhoneScreen, md: TabletScreen, lg: LaptopScreen, xl: DesktopScreen
 
 const MenuBelow = ({ open, handleClick, handleClose, anchorEl }) => {
   return (

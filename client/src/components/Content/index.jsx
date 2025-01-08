@@ -10,24 +10,19 @@ const Content = ({ products }) => {
   return (
     <Container
       maxWidth={false}
-      sx={{ backgroundColor: "#FFF5DA", py: 4}}
-      disableGutters
+      sx={{ backgroundColor: "#FFF5DA", py: 4, justifyContent: 'center', alignItems: 'center' }}
     >
       <Grid
         container
         sx={{
           padding: "2em",
           paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "auto", xl: "15em"},
-          margin: "auto",
         }}
       >
         <Grid
           sx={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "auto",
-            maxWidth: "100%",
+            justifyContent: "space-between",
           }}
         >
           <Box
@@ -38,9 +33,9 @@ const Content = ({ products }) => {
               maxWidth: {
                 xs: "100%",
                 sm: "40%",
-                md: "40%",
-                lg: "40%",
-                xl: "40%",
+                md: "50%",
+                lg: "50%",
+                xl: "50%",
               },
             }}
           >
@@ -50,12 +45,11 @@ const Content = ({ products }) => {
             sx={{
               display: {
                 xs: "none",
-                sm: "flex",
-                md: "flex",
-                lg: "flex",
-                xl: "flex",
+                sm: "block",
+                md: "block",
+                lg: "block",
+                xl: "block",
               },
-              margin: "auto",
             }}
           >
             <Right mostRated={mostRated} />

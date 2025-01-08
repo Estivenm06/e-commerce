@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "@mui/material";
 import { Right } from "./RightSide.jsx";
 import { Left } from "./LeftSide.jsx";
-// sx: PhoneScreen, md: TabletScreen, lg: LaptopScreen, xl: DesktopScreen, sm: TabletScreen
 
 const Header = () => {
   return (
@@ -11,13 +10,11 @@ const Header = () => {
         sx={{
           p: 3,
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
           alignItems: "center",
-          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "5em", xl: "15em" },
-          margin: 'auto'
+          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "auto", xl: "15em" },
         }}
         maxWidth='xl'
-        disableGutters
       >
         <Left />
         <Right />
