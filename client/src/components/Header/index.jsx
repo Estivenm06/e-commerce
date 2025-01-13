@@ -1,9 +1,8 @@
 import React from "react";
 import { Container } from "@mui/material";
-import { Right } from "./RightSide.jsx";
-import { Left } from "./LeftSide.jsx";
+import { Header } from './Header.jsx';
 
-const Header = () => {
+const Index = ({setUser}) => {
   return (
     <>
       <Container
@@ -16,11 +15,10 @@ const Header = () => {
         }}
         maxWidth='xl'
       >
-        <Left />
-        <Right />
+        <Header setUser={setUser}/>
       </Container>
     </>
   );
 };
 
-export default Header;
+export default Index;

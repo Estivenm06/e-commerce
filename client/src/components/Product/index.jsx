@@ -6,7 +6,7 @@ import { Product } from "./Product";
 const Index = ({ products }) => {
   const [feature, setFeature] = useState("recentListed");
   if (!products) {
-    return;
+    return null;
   }
 
   const toggleFeature = (option) => {

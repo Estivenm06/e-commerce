@@ -9,6 +9,7 @@ module.exports = {
   devServer: {
     port: 3002,
     static: path.resolve(__dirname, "./client/src"),
+    historyApiFallback: true
   },
   resolve: {
     alias: {

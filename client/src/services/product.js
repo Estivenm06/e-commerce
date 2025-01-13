@@ -9,7 +9,7 @@ export const getAll = async () => {
 }
 
 export const getOne = async ({id}) => {
-    const request = await axios.get(`${baseUrl}/id`)
+    const request = await axios.get(`${baseUrl}/${id}`)
     return request.data
 }
 

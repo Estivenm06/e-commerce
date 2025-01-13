@@ -9,10 +9,10 @@ const userRouter = require('./controllers/userRouter.js')
 const cartRouter = require('./controllers/cartRouter.js')
 const loginRouter = require('./controllers/loginRouter.js')
 const logoutRouter = require('./controllers/logoutRouter.js')
-
 const app = express();
-app.use(express.json());
 app.use(cors())
+app.use(express.json());
+
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/carts', cartRouter)
