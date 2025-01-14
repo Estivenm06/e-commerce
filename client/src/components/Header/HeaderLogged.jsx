@@ -14,11 +14,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./Search.jsx";
 import { logout } from "../../services/logout.js";
+import { useNavigate } from "react-router-dom";
 
 export const HeaderLogged = ({ user, setUser }) => {
   const [visibility, setVisibility] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const navigate = useNavigate()
   const openMenu = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -39,17 +40,13 @@ export const HeaderLogged = ({ user, setUser }) => {
       sx={{
         p: 2,
         display: "flex",
-        justifyContent: {
-          sm: "space-evenly",
-          md: "space-around",
-          lg: "space-evenly",
-        },
+        justifyContent: {sm: 'space-evenly', md: 'space-around', xl: 'space-between'},
         alignItems: "center",
-        margin: 'auto'
+        paddingInline: {xl: '17.2em'},
       }}
     >
-      <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+     <Box
+        sx={{ display: "flex", alignItems: 'center',}}
       >
         {/*IMAGE LOGO*/}
         <img
@@ -74,23 +71,40 @@ export const HeaderLogged = ({ user, setUser }) => {
               lg: "flex",
               xl: "flex",
             },
-            gap: "1.5em",
-            paddingLeft: "2em",
+            paddingLeft: '2em',
+            paddingRight: '3em'
           }}
         >
-          <Typography className="textHeader" children="HOME" />
-          <Typography className="textHeader" children="SHOP" />
-          <Typography className="textHeader" children="COLLECTIONS" />
-          <Typography className="textHeader" children="PAGES" />
-          <Typography className="textHeader" children="CONTACT" />
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="HOME" />}
+            onClick={() => navigate("/logged")}
+          />
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="SHOP" />}
+            onClick={() => navigate("/shop")}
+          />
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="CONTACT" />}
+            onClick={() => navigate("/contact")}
+          />
         </Box>
       </Box>
       {/* */}
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           alignItems: "center",
+          flexDirection: 'row'
         }}
       >
         <Search visibility={visibility} tvisibility={toggleVisibility} />
@@ -112,18 +126,11 @@ export const HeaderLogged = ({ user, setUser }) => {
           }}
           label={<SearchIcon />}
         />
-        <IconButton
-          children={<Avatar>{user.username.slice(0, 1)}</Avatar>}
-          sx={{
-            display: {
-              xs: "none",
+        <Avatar sx={{display: {              xs: "none",
               sm: "none",
               md: "none",
-              lg: "block",
-              xl: "block",
-            },
-          }}
-        />
+              lg: "flex",
+              xl: "flex",}}}>{user.username.slice(0, 1)}</Avatar>
         <Box
           sx={{
             display: {
@@ -140,23 +147,43 @@ export const HeaderLogged = ({ user, setUser }) => {
             children={<Avatar>{user.username.slice(0, 1)}</Avatar>}
           />
           <Menu open={openMenu} anchorEl={anchorEl} onClose={handleCloseMenu}>
-            <MenuItem
-              children={<Typography className="textHeader" children="HOME" />}
-            />
-            <MenuItem
-              children={<Typography className="textHeader" children="SHOP" />}
-            />
-            <MenuItem
+          <MenuItem
               children={
-                <Typography className="textHeader" children="COLLECTIONS" />
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="HOME" />
+                  }
+                  onClick={() => navigate("/")}
+                />
               }
             />
             <MenuItem
-              children={<Typography className="textHeader" children="PAGES" />}
+              children={
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="SHOP" />
+                  }
+                  onClick={() => navigate("/")}
+                />
+              }
             />
             <MenuItem
               children={
-                <Typography className="textHeader" children="CONTACT" />
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="CONTACT" />
+                  }
+                  onClick={() => navigate("/")}
+                />
               }
             />
             <MenuItem
@@ -231,5 +258,5 @@ export const HeaderLogged = ({ user, setUser }) => {
         />
       </Box>
     </Box>
-  );
+    );
 };

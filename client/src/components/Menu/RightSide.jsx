@@ -7,7 +7,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 export const Right = () => {
   return (
-    <Box sx={{display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}}>
+    <Box sx={{display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}}>
       <Divider orientation="vertical" sx={{ height: "1em", margin: "auto" }} />
       <IconButton
         children={<FacebookIcon color="primary" fontSize="small" />}

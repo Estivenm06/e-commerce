@@ -16,6 +16,7 @@ import { Register } from "./Register";
 import { ModalOverflow, ModalClose, ModalDialog, Modal } from "@mui/joy";
 import { Search } from "./Search.jsx";
 import SearchIcon from "@mui/icons-material/Search";
+import {useNavigate} from 'react-router-dom'
 
 export const Header = ({ setUser }) => {
   const [visibility, setVisibility] = useState(false);
@@ -23,6 +24,7 @@ export const Header = ({ setUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [checked, setChecked] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
+  const navigate = useNavigate();
 
   const openMenu = Boolean(anchorEl);
 
@@ -46,6 +48,7 @@ export const Header = ({ setUser }) => {
   const handleCloseMenu = () => setAnchorEl(null);
 
   const handleOpenLogin = () => {
+    setChecked(false);
     setOpen(true);
     handleCloseMenu();
   };
@@ -62,15 +65,18 @@ export const Header = ({ setUser }) => {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: 'space-between',
+        alignItems: "center",
+        width: '100%',
+      }}
+    >
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        sx={{ display: "flex", alignItems: "center", justifyContent: 'flex-start' }}
       >
+        {/*IMAGE LOGO */}
         <img
           src={"../../resources/LOGO.webp"}
           alt="LOGO"
@@ -82,7 +88,71 @@ export const Header = ({ setUser }) => {
             border: "1px solid orange",
           }}
         />
-        {/*xs PhoneScreen, sm TabletScreen, md TabletScreen */}
+        {/*xs PhoneScreen, sm TabletScreen, md TabletScreen, lg DesktopScreen, xl LargeDesktopScreen */}
+        {/*MENU FOR LARGE SCREENS */}
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "flex",
+              xl: "flex",
+            },
+            paddingLeft: "2em",
+            paddingRight: "3em",
+          }}
+        >
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="HOME" />}
+            onClick={() => navigate("/")}
+          />
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="SHOP" />}
+            onClick={() => navigate("/")}
+          />
+          <Button
+            size="small"
+            variant="none"
+            sx={{ padding: "0.5em" }}
+            children={<Typography className="textHeader" children="CONTACT" />}
+            onClick={() => navigate("/")}
+          />
+        </Box>
+      </Box>
+      {/* */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <Search visibility={visibility} tvisibility={toggleVisibility} />
+        <TextField
+          size="small"
+          color="none"
+          sx={{
+            cursor: "pointer",
+            transition: "0.5s",
+            display: {
+              xs: "flex",
+              sm: "flex",
+              md: "flex",
+              lg: "none",
+              xl: "none",
+            },
+            justifyContent: "end",
+            alignItems: "center",
+          }}
+          label={<SearchIcon />}
+        />
         <Box
           sx={{
             display: {
@@ -100,22 +170,42 @@ export const Header = ({ setUser }) => {
           </IconButton>
           <Menu open={openMenu} anchorEl={anchorEl} onClose={handleCloseMenu}>
             <MenuItem
-              children={<Typography className="textHeader" children="HOME" />}
-            />
-            <MenuItem
-              children={<Typography className="textHeader" children="SHOP" />}
-            />
-            <MenuItem
               children={
-                <Typography className="textHeader" children="COLLECTIONS" />
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="HOME" />
+                  }
+                  onClick={() => navigate("/")}
+                />
               }
             />
             <MenuItem
-              children={<Typography className="textHeader" children="PAGES" />}
+              children={
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="SHOP" />
+                  }
+                  onClick={() => navigate("/")}
+                />
+              }
             />
             <MenuItem
               children={
-                <Typography className="textHeader" children="CONTACT" />
+                <Button
+                  size="small"
+                  variant="none"
+                  sx={{ padding: "0.5em" }}
+                  children={
+                    <Typography className="textHeader" children="CONTACT" />
+                  }
+                  onClick={() => navigate("/")}
+                />
               }
             />
             <MenuItem
@@ -146,6 +236,7 @@ export const Header = ({ setUser }) => {
               }
             />
             <MenuItem
+              onClick={() => alert("You must log-in first.")}
               children={
                 <IconButton
                   children={<FavoriteIcon sx={{ color: "orange" }} />}
@@ -153,6 +244,7 @@ export const Header = ({ setUser }) => {
               }
             />
             <MenuItem
+              onClick={() => alert("You must log-in first.")}
               children={
                 <IconButton
                   children={<ShoppingCartIcon sx={{ color: "orange" }} />}
@@ -161,166 +253,112 @@ export const Header = ({ setUser }) => {
             />
           </Menu>
         </Box>
-        {/* lg DesktopScreen, xl LargeDesktopScreen */}
-        <Box
+        <Button
+          size="small"
+          disableElevation
+          onClick={handleOpenLogin}
+          sx={{
+            padding: "0.5em",
+            paddingInline: "1.5em",
+            border: "2px solid red",
+            borderRadius: "2em",
+            color: "primary",
+            transition: "0.5s",
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "block",
+              xl: "block",
+            },
+          }}
+          children={
+            <Typography
+              variant="button"
+              children="LOG IN"
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "none",
+                  lg: "block",
+                  xl: "block",
+                },
+              }}
+            />
+          }
+        />
+        <Modal open={open} onClose={handleClose}>
+          <ModalOverflow>
+            <ModalDialog layout="center" sx={{ backgroundColor: "#FFF5DA" }}>
+              <ModalClose />
+              {checked ? (
+                <Register
+                  checked={checked}
+                  toggleChecked={toggleChecked}
+                  userLocation={userLocation}
+                  handleClose={handleClose}
+                />
+              ) : (
+                <Login
+                  setUser={setUser}
+                  checked={checked}
+                  toggleChecked={toggleChecked}
+                />
+              )}
+            </ModalDialog>
+          </ModalOverflow>
+        </Modal>
+        <Button
+          onClick={handleOpenRegister}
+          size="small"
+          children={
+            <Typography
+              color="black"
+              children="SIGN UP"
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "none",
+                  lg: "block",
+                  xl: "block",
+                },
+              }}
+            />
+          }
+        />
+        <IconButton
+          onClick={() => alert("You must log-in first.")}
+          children={<FavoriteIcon sx={{ color: "orange" }} />}
           sx={{
             display: {
               xs: "none",
               sm: "none",
               md: "none",
-              lg: "flex",
-              xl: "flex",
+              lg: "block",
+              xl: "block",
             },
-            gap: "1.5em",
-            paddingLeft: "2em",
           }}
-        >
-          <Typography className="textHeader" children="HOME" />
-          <Typography className="textHeader" children="SHOP" />
-          <Typography className="textHeader" children="COLLECTIONS" />
-          <Typography className="textHeader" children="PAGES" />
-          <Typography className="textHeader" children="CONTACT" />
-        </Box>
-      </Box>
-      {/* */}
-      <Box
-        sx={{
-          display: "flex",
-        }}
-      >
-        <Search visibility={visibility} tvisibility={toggleVisibility} />
-        <TextField
-          size="small"
-          color="none"
-          sx={{
-            cursor: "pointer",
-            transition: "0.5s",
-            display: {
-              xs: "flex",
-              sm: "flex",
-              md: "flex",
-              lg: "none",
-              xl: "none",
-            },
-            justifyContent: "end",
-            alignItems: "center",
-          }}
-          label={<SearchIcon />}
         />
-        {/* */}
-        <Box
-          sx={{
-            display: "flex",
-            gap: "0.5em",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            size="small"
-            disableElevation
-            onClick={handleOpenLogin}
-            sx={{
-              padding: "0.5em",
-              paddingInline: "1.5em",
-              border: "2px solid red",
-              borderRadius: "2em",
-              color: "primary",
-              transition: "0.5s",
-              display: {
-                xs: "none",
-                sm: "none",
-                md: "none",
-                lg: "block",
-                xl: "block",
-              },
-            }}
-            children={
-              <Typography
-                variant="button"
-                children="LOG IN"
-                sx={{
-                  display: {
-                    xs: "none",
-                    sm: "none",
-                    md: "none",
-                    lg: "block",
-                    xl: "block",
-                  },
-                }}
-              />
-            }
-          />
-          <Modal open={open} onClose={handleClose}>
-            <ModalOverflow>
-              <ModalDialog layout="center" sx={{ backgroundColor: "#FFF5DA" }}>
-                <ModalClose />
-                {checked ? (
-                  <Register
-                    checked={checked}
-                    toggleChecked={toggleChecked}
-                    userLocation={userLocation}
-                    handleClose={handleClose}
-                  />
-                ) : (
-                  <Login
-                    setUser={setUser}
-                    checked={checked}
-                    toggleChecked={toggleChecked}
-                  />
-                )}
-              </ModalDialog>
-            </ModalOverflow>
-          </Modal>
-          <Button
-            onClick={handleOpenRegister}
-            size="small"
-            children={
-              <Typography
-                color="black"
-                children="SIGN UP"
-                sx={{
-                  display: {
-                    xs: "none",
-                    sm: "none",
-                    md: "none",
-                    lg: "block",
-                    xl: "block",
-                  },
-                }}
-              />
-            }
-          />
-          <IconButton
-            children={<FavoriteIcon sx={{ color: "orange" }} />}
-            sx={{
-              display: {
-                xs: "none",
-                sm: "none",
-                md: "none",
-                lg: "block",
-                xl: "block",
-              },
-            }}
-          />
-          <IconButton
-            children={
-              <ShoppingCartIcon
-                sx={{
-                  color: "orange",
-                  display: {
-                    xs: "none",
-                    sm: "none",
-                    md: "none",
-                    lg: "block",
-                    xl: "block",
-                  },
-                }}
-              />
-            }
-          />
-        </Box>
+        <IconButton
+          onClick={() => alert("You must log-in first.")}
+          children={
+            <ShoppingCartIcon
+              sx={{
+                color: "orange",
+                display: {
+                  xs: "none",
+                  sm: "none",
+                  md: "none",
+                  lg: "block",
+                  xl: "block",
+                },
+              }}
+            />
+          }
+        />
       </Box>
-    </>
+    </Box>
   );
 };

@@ -30,7 +30,7 @@ const Phone = ({ label }) => {
 };
 export const Left = () => {
   return (
-    <Box sx={{display: 'flex', gap: '0.7em', justifyContent: 'center', margin: 'auto'}}>
+    <Box sx={{display: 'flex', gap: '0.7em', justifyContent: 'flex-start'}}>
       <Typography
         variant="caption"
         sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'}}}

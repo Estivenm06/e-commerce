@@ -9,9 +9,11 @@ const MenuTop = () => {
       sx={{
         p: 0.5,
         display: "flex",
-        justifyContent: {sx: 'space-evenly', md: 'space-between'},
+        justifyContent: {xs: 'center', sm: 'space-evenly', md: 'space-around', xl: 'space-between', lg: 'space-around'},
         alignItems: "center",
         textAlign: "center",
+        width: '100%',
+        paddingInline: {xl: '6em'}
       }}
     >
         <Left />
