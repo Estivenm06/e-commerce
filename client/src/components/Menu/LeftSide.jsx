@@ -15,7 +15,7 @@ const Location = ({ label }) => {
 const Email = ({ label }) => {
   return (
     <>
-      <EmailIcon sx={{ color: "#722F37" }} fontSize="small" />
+      <EmailIcon sx={{ color: "#722F37" }} fontSize="small"/>
       {label}
     </>
   );
@@ -32,20 +32,20 @@ export const Left = () => {
   return (
     <>
       <Typography
-        fontSize={"0.9em"}
-        sx={{ display: "flex", justifyContent: "center", gap: "0.1em", alignItems: 'center'}}
+        variant="caption"
+        sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'}}}
         children={<Phone label="+(1) 2019375338" />}
       />
       <Divider orientation="vertical" sx={{ height: "1em", margin: "auto" }} />
       <Typography
-        fontSize={"0.9em"}
-        sx={{ display: "flex", justifyContent: "center", gap: "0.1em" }}
+      variant="caption"
+        sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'} }}
         children={<Email label="nova@gmail.com" />}
       />
       <Divider orientation="vertical" sx={{ height: "1em", margin: "auto" }} />
       <Typography
-        fontSize={"0.9em"}
-        sx={{ display: "flex", justifyContent: "center", gap: "0.1em" }}
+        variant="caption"
+        sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'} }}
         children={<Location label="Location" />}
       />
     </>

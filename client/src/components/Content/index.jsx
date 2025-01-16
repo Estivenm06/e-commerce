@@ -9,34 +9,28 @@ const Content = ({ products }) => {
   const mostRated = products.find((product) => Math.max(product.rating.rate));
   return (
     <Container
-      maxWidth={false}
-      sx={{ backgroundColor: "#FFF5DA", py: 4, justifyContent: 'center', alignItems: 'center' }}
+      maxWidth='xl'
+      disableGutters
+      sx={{ py: 4, backgroundColor: "#FFF5DA", alignItems: 'center' }}
     >
       <Grid
         container
-        sx={{
-          padding: "2em",
-          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "auto", xl: "15em"},
-        }}
       >
-        <Grid
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <Grid sx={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly'}}>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "start",
-              maxWidth: {
-                xs: "100%",
-                sm: "40%",
-                md: "50%",
-                lg: "50%",
-                xl: "50%",
+              width: {
+                xs: '100%',
+                sm: '50%',
+                md: '40%',
+                lg: '40%',
+                xl: '30%'
               },
+              padding: {
+                xs: '2em'
+              }
             }}
           >
             <Left />
@@ -45,10 +39,10 @@ const Content = ({ products }) => {
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
-                md: "block",
-                lg: "block",
-                xl: "block",
+                sm: "flex",
+                md: "flex",
+                lg: "flex",
+                xl: "flex",
               },
             }}
           >

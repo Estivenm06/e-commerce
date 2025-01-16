@@ -1,26 +1,29 @@
 import React from "react";
-import { Container } from "@mui/material";
-import { Right } from "./RightSide.jsx";
-import { Left } from "./LeftSide.jsx";
+import { Container, Box } from "@mui/material";
+import { Header } from "./Header.jsx";
+import {HeaderLogged} from './HeaderLogged.jsx'
 
-const Header = () => {
+const Index = ({ user, setUser, currentPage }) => {
   return (
-    <>
-      <Container
+    <Container
+      sx={{
+        p: 3,
+        display: "flex",
+      }}
+      maxWidth="xl"
+      disableGutters
+    >
+      <Box
         sx={{
-          p: 3,
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingInline: { xs: "10%", sm: "10%", md: "auto", lg: "auto", xl: "15em" },
-        }}
-        maxWidth='xl'
-      >
-        <Left />
-        <Right />
-      </Container>
-    </>
+          alignItems: 'center',
+          width: '100%',
+          justifyContent: 'space-evenly',
+        }}>
+          {user?.username ? <HeaderLogged user={user} setUser={setUser} currentPage={currentPage} /> : <Header setUser={setUser} currentPage={currentPage} />}
+      </Box>
+    </Container>
   );
 };
 
-export default Header;
+export default Index;
