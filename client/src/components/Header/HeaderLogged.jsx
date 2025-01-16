@@ -12,14 +12,14 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import { Search } from "./Search.jsx";
+import { Search } from "./utilsComponents/Search.jsx";
 import { logout } from "../../services/logout.js";
 import { useNavigate } from "react-router-dom";
 
-export const HeaderLogged = ({ user, setUser }) => {
+export const HeaderLogged = ({ user, setUser, currentPage }) => {
   const [visibility, setVisibility] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const openMenu = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -30,24 +30,15 @@ export const HeaderLogged = ({ user, setUser }) => {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   const handleLogout = async () => {
-    await logout()
-    localStorage.removeItem('userLogged')
-    setUser({})
-  }
+    await logout();
+    localStorage.removeItem("userLogged");
+    setUser({});
+    window.location.reload();
+  };
 
   return (
-    <Box
-      sx={{
-        p: 2,
-        display: "flex",
-        justifyContent: {sm: 'space-evenly', md: 'space-around', xl: 'space-between'},
-        alignItems: "center",
-        paddingInline: {xl: '17.2em'},
-      }}
-    >
-     <Box
-        sx={{ display: "flex", alignItems: 'center',}}
-      >
+    <>
+      <Box sx={{ display: "flex" }}>
         {/*IMAGE LOGO*/}
         <img
           src={"../../resources/LOGO.webp"}
@@ -71,29 +62,48 @@ export const HeaderLogged = ({ user, setUser }) => {
               lg: "flex",
               xl: "flex",
             },
-            paddingLeft: '2em',
-            paddingRight: '3em'
+            paddingLeft: "2em",
+            paddingRight: "3em",
           }}
         >
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="HOME" />}
-            onClick={() => navigate("/logged")}
+            children={
+              <Typography
+                className={currentPage === "/" ? "headerActive" : "textHeader"}
+                children="HOME"
+              />
+            }
+            onClick={() => navigate("/")}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="SHOP" />}
+            children={
+              <Typography
+                className={
+                  currentPage === "shop" ? "headerActive" : "textHeader"
+                }
+                children="SHOP"
+              />
+            }
             onClick={() => navigate("/shop")}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="CONTACT" />}
+            children={
+              <Typography
+                className={
+                  currentPage === "contact" ? "headerActive" : "textHeader"
+                }
+                children="CONTACT"
+              />
+            }
             onClick={() => navigate("/contact")}
           />
         </Box>
@@ -102,9 +112,7 @@ export const HeaderLogged = ({ user, setUser }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-end",
           alignItems: "center",
-          flexDirection: 'row'
         }}
       >
         <Search visibility={visibility} tvisibility={toggleVisibility} />
@@ -126,11 +134,19 @@ export const HeaderLogged = ({ user, setUser }) => {
           }}
           label={<SearchIcon />}
         />
-        <Avatar sx={{display: {              xs: "none",
+        <Avatar
+          sx={{
+            display: {
+              xs: "none",
               sm: "none",
               md: "none",
               lg: "flex",
-              xl: "flex",}}}>{user.username.slice(0, 1)}</Avatar>
+              xl: "flex",
+            },
+          }}
+        >
+          {user.username.slice(0, 1)}
+        </Avatar>
         <Box
           sx={{
             display: {
@@ -147,14 +163,19 @@ export const HeaderLogged = ({ user, setUser }) => {
             children={<Avatar>{user.username.slice(0, 1)}</Avatar>}
           />
           <Menu open={openMenu} anchorEl={anchorEl} onClose={handleCloseMenu}>
-          <MenuItem
+            <MenuItem
               children={
                 <Button
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={
-                    <Typography className="textHeader" children="HOME" />
+                    <Typography
+                      className={
+                        currentPage === "/" ? "headerActive" : "textHeader"
+                      }
+                      children="HOME"
+                    />
                   }
                   onClick={() => navigate("/")}
                 />
@@ -167,9 +188,14 @@ export const HeaderLogged = ({ user, setUser }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={
-                    <Typography className="textHeader" children="SHOP" />
+                    <Typography
+                      className={
+                        currentPage === "shop" ? "headerActive" : "textHeader"
+                      }
+                      children="SHOP"
+                    />
                   }
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/shop")}
                 />
               }
             />
@@ -180,9 +206,16 @@ export const HeaderLogged = ({ user, setUser }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={
-                    <Typography className="textHeader" children="CONTACT" />
+                    <Typography
+                      className={
+                        currentPage === "contact"
+                          ? "headerActive"
+                          : "textHeader"
+                      }
+                      children="CONTACT"
+                    />
                   }
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/contact")}
                 />
               }
             />
@@ -252,11 +285,21 @@ export const HeaderLogged = ({ user, setUser }) => {
         />
         <Button
           onClick={handleLogout}
-          sx={{display: {xs: 'none', sm: 'none', md: 'none', lg: 'block', xl: 'block'}, border: '1px red solid', borderRadius: '0.5em'}}
+          sx={{
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "block",
+              xl: "block",
+            },
+            border: "1px red solid",
+            borderRadius: "0.5em",
+          }}
           children={<Typography children="LOG OUT" variant="button" />}
           size="small"
         />
       </Box>
-    </Box>
-    );
+    </>
+  );
 };

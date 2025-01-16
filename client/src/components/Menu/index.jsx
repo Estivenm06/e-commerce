@@ -1,25 +1,27 @@
 import React from "react";
-import { Container} from "@mui/material";
+import { Container, Box } from "@mui/material";
 import { Left } from "./LeftSide";
 import { Right } from "./RightSide";
 
-const MenuTop = () => {
+const Menu = () => {
   return (
     <Container
       sx={{
-        p: 0.5,
+        p: 1,
         display: "flex",
-        justifyContent: {xs: 'center', sm: 'space-evenly', md: 'space-around', xl: 'space-between', lg: 'space-around'},
-        alignItems: "center",
-        textAlign: "center",
-        width: '100%',
-        paddingInline: {xl: '6em'}
+        justifyContent: 'space-around',
       }}
+      maxWidth='xl'
+      disableGutters
     >
+      <Box sx={{display: 'flex', gap: '0.7em', alignItems: 'center'}}>
         <Left />
+      </Box>
+      <Box sx={{display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex'}}}>
         <Right />
+      </Box>
     </Container>
   );
 };
 
-export default MenuTop;
+export default Menu;

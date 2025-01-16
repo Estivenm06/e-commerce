@@ -11,14 +11,14 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Login } from "./Login";
-import { Register } from "./Register";
+import { Login } from "./utilsComponents/Login.jsx";
+import { Register } from "./utilsComponents/Register.jsx";
 import { ModalOverflow, ModalClose, ModalDialog, Modal } from "@mui/joy";
-import { Search } from "./Search.jsx";
+import { Search } from "./utilsComponents/Search.jsx";
 import SearchIcon from "@mui/icons-material/Search";
 import {useNavigate} from 'react-router-dom'
 
-export const Header = ({ setUser }) => {
+export const Header = ({ setUser, currentPage }) => {
   const [visibility, setVisibility] = useState(false);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -65,16 +65,9 @@ export const Header = ({ setUser }) => {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: 'space-between',
-        alignItems: "center",
-        width: '100%',
-      }}
-    >
+    <>
       <Box
-        sx={{ display: "flex", alignItems: "center", justifyContent: 'flex-start' }}
+        sx={{ display: "flex" }}
       >
         {/*IMAGE LOGO */}
         <img
@@ -99,30 +92,29 @@ export const Header = ({ setUser }) => {
               lg: "flex",
               xl: "flex",
             },
-            paddingLeft: "2em",
-            paddingRight: "3em",
+            marginLeft: "2em",
           }}
         >
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="HOME" />}
-            onClick={() => navigate("/")}
+            children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
+            onClick={() => navigate('/')}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="SHOP" />}
-            onClick={() => navigate("/")}
+            children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
+            onClick={() => navigate('/shop')}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className="textHeader" children="CONTACT" />}
-            onClick={() => navigate("/")}
+            children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'}children="CONTACT" />}
+            onClick={() => navigate('/contact')}
           />
         </Box>
       </Box>
@@ -130,7 +122,6 @@ export const Header = ({ setUser }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-end",
           alignItems: "center",
         }}
       >
@@ -175,10 +166,8 @@ export const Header = ({ setUser }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={
-                    <Typography className="textHeader" children="HOME" />
-                  }
-                  onClick={() => navigate("/")}
+                  children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
+                  onClick={() => navigate('/')}
                 />
               }
             />
@@ -188,10 +177,8 @@ export const Header = ({ setUser }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={
-                    <Typography className="textHeader" children="SHOP" />
-                  }
-                  onClick={() => navigate("/")}
+                  children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
+                  onClick={() => navigate('/shop')}
                 />
               }
             />
@@ -201,10 +188,8 @@ export const Header = ({ setUser }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={
-                    <Typography className="textHeader" children="CONTACT" />
-                  }
-                  onClick={() => navigate("/")}
+                  children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'} children="CONTACT" />}
+                  onClick={() => navigate('/contact')}
                 />
               }
             />
@@ -268,8 +253,8 @@ export const Header = ({ setUser }) => {
               xs: "none",
               sm: "none",
               md: "none",
-              lg: "block",
-              xl: "block",
+              lg: "flex",
+              xl: "flex",
             },
           }}
           children={
@@ -281,8 +266,8 @@ export const Header = ({ setUser }) => {
                   xs: "none",
                   sm: "none",
                   md: "none",
-                  lg: "block",
-                  xl: "block",
+                  lg: "flex",
+                  xl: "flex",
                 },
               }}
             />
@@ -321,8 +306,8 @@ export const Header = ({ setUser }) => {
                   xs: "none",
                   sm: "none",
                   md: "none",
-                  lg: "block",
-                  xl: "block",
+                  lg: "flex",
+                  xl: "flex",
                 },
               }}
             />
@@ -336,8 +321,8 @@ export const Header = ({ setUser }) => {
               xs: "none",
               sm: "none",
               md: "none",
-              lg: "block",
-              xl: "block",
+              lg: "flex",
+              xl: "flex",
             },
           }}
         />
@@ -351,14 +336,14 @@ export const Header = ({ setUser }) => {
                   xs: "none",
                   sm: "none",
                   md: "none",
-                  lg: "block",
-                  xl: "block",
+                  lg: "flex",
+                  xl: "flex",
                 },
               }}
             />
           }
         />
       </Box>
-    </Box>
+    </>
   );
 };

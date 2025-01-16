@@ -1,8 +1,8 @@
-import { Box, Button, Typography, TextField, Switch } from "@mui/material";
+import { Button, Typography, TextField, Switch } from "@mui/material";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { login } from "../../services/login";
+import { login } from "../../../services/login";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ export const Login = ({ checked, toggleChecked, setUser }) => {
           setUser(response)
           window.location.reload()
           setTimeout(() => {
-            navigate('/logged')
+            navigate('/')
             setAlert(false);
           }, 3000);
         }

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Typography, TextField, Switch } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { createOne } from "../../services/user";
+import { createOne } from "../../../services/user";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 

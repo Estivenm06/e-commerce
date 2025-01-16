@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
 export const Left = () => {
   return (
@@ -12,6 +12,7 @@ export const Left = () => {
           distinctio harum obcaecati laboriosam deserunt. Commodi nulla vero,
           laboriosam libero modi facilis?
         </Typography>
+        <Box>
           <Button
             sx={{
               backgroundColor: "white",
@@ -23,9 +24,9 @@ export const Left = () => {
               color: "white",
               marginTop: "2em",
             }}
-          >
-            <Typography variant="button">shop now</Typography>
-          </Button>
+            children={<Typography variant="button">shop now</Typography>}
+          />
+        </Box>
     </>
   );
 };
