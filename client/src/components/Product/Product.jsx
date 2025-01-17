@@ -45,6 +45,11 @@ export const Product = ({ products, feature }) => {
     return <Typography>"No products found for this category"</Typography>;
   }
 
+  const truncateTitle = (title) => {
+    const keywords = title.split(/\s+/).slice(0, 3).join(' ')
+    return keywords
+  }
+
   return (
     <Grid container spacing={1} sx={{ py: '2em', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {filteredProducts.map((item) => (
@@ -58,7 +63,7 @@ export const Product = ({ products, feature }) => {
                         style={{ width: "200px", height: "250px", objectFit: "fill"}}
                     />
                     <Box sx={{ padding: '1em', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="h6">{item.title}</Typography>
+                        <Typography variant="h6" children={truncateTitle(item.title)}/>
                         <Price price={item.price} />
                     </Box>
                 </Box>

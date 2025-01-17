@@ -8,6 +8,7 @@ const ShopIndex = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [selected, setSelected] = useState(4);
+  const [visual, setVisual] = useState('window')
 
   const handleSetLimit = (limit, selected) => {
     setLimit(limit);
@@ -19,6 +20,10 @@ const ShopIndex = ({ products }) => {
     const endIndex = startIndex + limit;
     setDisplayedProducts(products.slice(startIndex, endIndex));
   }, [limit, currentPage, products]);
+
+  const handleMode = (mode) => {
+    setVisual(mode)
+  }
 
   return (
     <Container
@@ -37,6 +42,8 @@ const ShopIndex = ({ products }) => {
           products={products}
           handleSetLimit={handleSetLimit}
           selected={selected}
+          visual={visual}
+          handleMode={handleMode}
         />
         <Products
           products={products}
