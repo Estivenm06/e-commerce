@@ -1,15 +1,22 @@
 import React from "react";
 import {
   IconButton,
-  Button,
   Box,
   Divider,
   Typography,
   Container,
+  Menu,
+  MenuItem,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
 } from "@mui/material";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import ViewListOutlinedIcon from "@mui/icons-material/ViewListOutlined";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import SortIcon from "@mui/icons-material/Sort";
 
 export const Top = ({
   handleSetLimit,
@@ -18,6 +25,18 @@ export const Top = ({
   selected,
   handleMode,
   visual,
+  openFilter,
+  handleClickFilter,
+  handleCloseFilter,
+  anchorElFilter,
+  handleRadioChangeFilter,
+  valueFilter,
+  openSort,
+  handleClickSort,
+  handleCloseSort,
+  anchorElSort,
+  handleRadioChangeSort,
+  valueSort,
 }) => {
   const styleOn = {
     border: "1px black solid",
@@ -51,10 +70,9 @@ export const Top = ({
             display: "flex",
             flexDirection: "column",
             p: "1em",
-            width: "100%",
           }}
         >
-          <Box sx={{ display: "inline-flex", flexDirection: "row" }} gap={0.5}>
+          <Box sx={{ display: "flex", flexDirection: "row" }} gap={0.5}>
             <IconButton
               children={<Typography variant="button" children="3" />}
               size="small"
@@ -89,8 +107,9 @@ export const Top = ({
         >
           {visual === "window" ? (
             <IconButton
-              children={<WindowOutlinedIcon/>}
-              onClick={() => handleMode("list")}/>
+              children={<WindowOutlinedIcon />}
+              onClick={() => handleMode("list")}
+            />
           ) : (
             <IconButton
               children={<ViewListOutlinedIcon />}
@@ -107,12 +126,65 @@ export const Top = ({
             flexDirection: "column",
           }}
         >
-          <IconButton children={<TuneOutlinedIcon />} />
+          <IconButton
+            children={<TuneOutlinedIcon />}
+            onClick={handleClickFilter}
+          />
           <Typography
             variant="overline"
             children="Filters"
             fontSize={"small"}
           />
+          <Menu
+            open={openFilter}
+            onClose={handleCloseFilter}
+            anchorEl={anchorElFilter}
+          >
+            <FormControl>
+              <FormLabel>Categories</FormLabel>
+              <RadioGroup
+                value={valueFilter}
+                onChange={handleRadioChangeFilter}
+                defaultValue={"All"}
+              >
+                <MenuItem>
+                  <FormControlLabel
+                    value={"All"}
+                    control={<Radio />}
+                    label="All"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"men's clothing"}
+                    control={<Radio />}
+                    label="Men's clothing"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"jewelery"}
+                    control={<Radio />}
+                    label="Jewelery"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"electronics"}
+                    control={<Radio />}
+                    label="Electronics"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"women's clothing"}
+                    control={<Radio />}
+                    label="Women's clothing"
+                  />
+                </MenuItem>
+              </RadioGroup>
+            </FormControl>
+          </Menu>
         </Box>
         <Divider orientation="vertical" flexItem />
         <Box
@@ -120,9 +192,56 @@ export const Top = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <IconButton>Sort by</IconButton>
+          <IconButton children={<SortIcon />} onClick={handleClickSort} />
+          <Menu open={openSort} onClose={handleCloseSort} anchorEl={anchorElSort}>
+            <FormControl>
+              <FormLabel>Sort by</FormLabel>
+              <RadioGroup
+                value={valueSort}
+                onChange={handleRadioChangeSort}
+                defaultValue={"Nothing"}
+              >
+                <MenuItem>
+                  <FormControlLabel
+                    value={"Nothing"}
+                    control={<Radio />}
+                    label="Nothing"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"most rated"}
+                    control={<Radio />}
+                    label="Most rated"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"lowest rated"}
+                    control={<Radio />}
+                    label="Lowest rated"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"expensive"}
+                    control={<Radio />}
+                    label="Expensive"
+                  />
+                </MenuItem>
+                <MenuItem>
+                  <FormControlLabel
+                    value={"cheapest"}
+                    control={<Radio />}
+                    label="Cheapest"
+                  />
+                </MenuItem>
+              </RadioGroup>
+            </FormControl>
+          </Menu>
         </Box>
         <Divider orientation="vertical" flexItem />
       </Container>

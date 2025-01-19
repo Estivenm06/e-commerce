@@ -1,9 +1,5 @@
 import React from "react";
-
 import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
   Typography,
   Box
 } from "@mui/material";
@@ -27,20 +23,20 @@ const Price = ({ price }) => {
 };
 
 export const Product = ({ products, feature }) => {
-  const getFilteredProducts = () => {
+  const getFilteredProducts = (feature) => {
     switch (feature) {
       case "recentListed":
         return products.slice(0, 3);
       case "lowerPrices":
-        return products.filter((item) => item.price < 20).slice(0, 3);
+        return products.sort((a,b) => a.price - b.price).slice(0, 3);
       case "topFeatured":
-        return products.filter((item) => item.rating.rate > 4).slice(0, 3);
+        return products.sort((a,b) => b.rating.rate - a.rating.rate).slice(0, 3);
       default:
         return [];
     }
   };
 
-  const filteredProducts = getFilteredProducts();
+  const filteredProducts = getFilteredProducts(feature);
   if (!filteredProducts || filteredProducts.length === 0) {
     return <Typography>"No products found for this category"</Typography>;
   }
