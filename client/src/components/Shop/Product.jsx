@@ -8,7 +8,7 @@ const truncateTitle = (title) => {
 
 export const WindowMode = ({ item }) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", padding: "0.5em" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", padding: "0.5em", justifyContent: "flex-start" }}>
       <Box
         sx={{
           display: "inline-flex",
@@ -50,7 +50,7 @@ export const WindowMode = ({ item }) => {
 
 export const ListMode = ({ item }) => {
   return (
-      <Box sx={{ display: "flex", flexDirection: "row", padding: '2em'}}>
+      <Box sx={{ display: "flex", flexDirection: {xs: 'column', sm: "row"}, padding: '2em', justifyContent: {xs: 'center'}, alignItems: {xs: 'center'}}}>
         <Box
           sx={{
             display: "inline-flex",

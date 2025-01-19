@@ -60,7 +60,7 @@ export const Top = ({
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          gap: "10%",
+          gap: {xl: "10%"},
         }}
         maxWidth={false}
         disableGutters
@@ -103,6 +103,7 @@ export const Top = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            width: {xs: '100%', xl: 'auto'}
           }}
         >
           {visual === "window" ? (
@@ -124,6 +125,7 @@ export const Top = ({
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            width: {xs: '100%', xl: 'auto'}
           }}
         >
           <IconButton
@@ -193,6 +195,7 @@ export const Top = ({
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            width: {xs: '100%', xl: 'auto'}
           }}
         >
           <IconButton children={<SortIcon />} onClick={handleClickSort} />

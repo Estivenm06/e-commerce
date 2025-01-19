@@ -10,6 +10,7 @@ export const Products = ({
   currentPage,
   visual
 }) => {
+  
   const handleChangePage = (event, newPage) => {
     setCurrentPage(newPage);
   };
@@ -34,7 +35,7 @@ export const Products = ({
     overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
-    px: paddingPX(limit),
+    px: {xl: paddingPX(limit)},
   }
 
   const styleList = {
