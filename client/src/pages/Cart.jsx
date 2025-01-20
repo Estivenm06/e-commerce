@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Menu from "../components/Menu/index.jsx";
-import Header from '../components/Header/index.jsx'
+import Header from "../components/Header/index.jsx";
 import { Divider, Container, CssBaseline } from "@mui/material";
 
-export const Contact = ({user, setUser, cart}) => {
-  const [currentPage, setCurrentPage] = useState('contact')
+export const Cart = ({ user, setUser, cart }) => {
+  const [currentPage, setCurrentPage] = useState("cart");
   return (
     <Container
       maxWidth={false}
@@ -14,7 +14,12 @@ export const Contact = ({user, setUser, cart}) => {
       <CssBaseline />
       <Menu />
       <Divider />
-      <Header user={user} setUser={setUser} currentPage={currentPage} cart={cart}/>
+      <Header
+        user={user}
+        setUser={setUser}
+        cart={cart}
+        currentPage={currentPage}
+      />
       <Divider />
       <Divider />
     </Container>

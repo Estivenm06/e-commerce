@@ -3,7 +3,7 @@ import { Container, Box } from "@mui/material";
 import { Top } from "./top.jsx";
 import { Products } from "./Products.jsx";
 
-const ShopIndex = ({ products }) => {
+const ShopIndex = ({ products, user, setCart, cart, handleAddToCart}) => {
   const [limit, setLimit] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedProducts, setDisplayedProducts] = useState([]);
@@ -120,7 +120,11 @@ const ShopIndex = ({ products }) => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           visual={visual}
-        />
+          user={user}
+          setCart={setCart}
+          cart={cart}
+          handleAddToCart={handleAddToCart}
+    />
       </Box>
     </Container>
   );

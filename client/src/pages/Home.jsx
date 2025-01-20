@@ -5,7 +5,7 @@ import Content from "../components/Content/index.jsx";
 import Product from "../components/Product/index.jsx";
 import { Container, Divider, CssBaseline } from "@mui/material";
 
-export const Home = ({ products, setUser, user }) => {
+export const Home = ({ products, setUser, user, cart }) => {
   const [currentPage, setCurrentPage] = useState('/')
   return (
     <Container
@@ -16,7 +16,7 @@ export const Home = ({ products, setUser, user }) => {
       <CssBaseline />
       <Menu />
       <Divider />
-      <Header setUser={setUser} user={user} currentPage={currentPage} />
+      <Header setUser={setUser} user={user} currentPage={currentPage} cart={cart} />
       <Divider />
       <Content products={products} />
       <Divider />

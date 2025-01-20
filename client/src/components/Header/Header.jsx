@@ -100,21 +100,21 @@ export const Header = ({ setUser, currentPage }) => {
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-            onClick={() => navigate('/')}
+            onClick={() => {navigate('/'); window.location.reload()}}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-            onClick={() => navigate('/shop')}
+            onClick={() => {navigate('/shop'); window.location.reload()}}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'}children="CONTACT" />}
-            onClick={() => navigate('/contact')}
+            onClick={() => {navigate('/contact'); window.location.reload()}}
           />
         </Box>
       </Box>
@@ -167,7 +167,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-                  onClick={() => navigate('/')}
+                  onClick={() => {navigate('/'); window.location.reload()}}
                 />
               }
             />
@@ -178,7 +178,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-                  onClick={() => navigate('/shop')}
+                  onClick={() => {navigate('/shop'); window.location.reload()}}
                 />
               }
             />
@@ -189,7 +189,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'} children="CONTACT" />}
-                  onClick={() => navigate('/contact')}
+                  onClick={() => {navigate('/contact'); window.location.reload()}}
                 />
               }
             />

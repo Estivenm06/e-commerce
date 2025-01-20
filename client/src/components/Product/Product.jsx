@@ -56,7 +56,7 @@ export const Product = ({ products, feature }) => {
                         src={`${item.image}?w=248&fit=crop&auto=format`}
                         alt={item.title}
                         loading="lazy"
-                        style={{ width: "200px", height: "250px", objectFit: "fill"}}
+                        style={{ width: "200px", height: "250px", objectFit: "contain"}}
                     />
                     <Box sx={{ padding: '1em', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography variant="h6" children={truncateTitle(item.title)}/>

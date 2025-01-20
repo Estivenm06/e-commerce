@@ -73,7 +73,7 @@ router.post("/", async (req, res) => {
   
     return res
       .status(201)
-      .json({ token, username: user.username, name: user.name, active: true });
+      .json({ token, username: user.username, name: user.name, active: true, id: user.id});
   }catch{
     return res.status(400).json({error: 'The request could not be completed.'})
   }

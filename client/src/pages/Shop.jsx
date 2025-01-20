@@ -4,7 +4,7 @@ import Header from "../components/Header/index.jsx";
 import ShopIndex from "../components/Shop/index.jsx";
 import { Divider, Container, CssBaseline } from "@mui/material";
 
-export const Shop = ({user, setUser, products}) => {
+export const Shop = ({user, setUser, products, cart, setCart, handleAddToCart}) => {
   const [pageHeader, setPageHeader] = useState('shop')
 
   return (
@@ -16,9 +16,9 @@ export const Shop = ({user, setUser, products}) => {
       <CssBaseline />
       <Menu />
       <Divider />
-      <Header user={user} setUser={setUser} currentPage={pageHeader}/>
+      <Header user={user} setUser={setUser} currentPage={pageHeader} cart={cart} />
       <Divider />
-      <ShopIndex products={products} />
+      <ShopIndex products={products} user={user} setCart={setCart} cart={cart} handleAddToCart={handleAddToCart}/>
     </Container>
   );
 };
