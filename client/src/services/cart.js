@@ -9,8 +9,8 @@ export const getAllCart = async (id) => {
     return request.data
 }
 
-export const createOneCart = async (item) => {
-    const request = await axios.post(baseUrl, item, {headers: {'Authorization': token}})
+export const createOneCart = async (products) => {
+    const request = await axios.post(baseUrl, {products: products}, {headers: {'Authorization': token}})
     return request.data
 }
 
@@ -19,7 +19,7 @@ export const updateOneCart = async ({id, body}) => {
     return request.data
 }
 
-export const deleteOneCart = async ({id}) => {
-    const request = await axios.delete(`baseUrl/${id}`, {headers: {'Authorization': token}})
+export const deleteOneCart = async (id) => {
+    const request = await axios.delete(`${baseUrl}/${id}`, {headers: {'Authorization': token}})
     return request.data
 }

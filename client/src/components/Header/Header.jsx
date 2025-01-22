@@ -51,6 +51,7 @@ export const Header = ({ setUser, currentPage }) => {
     setChecked(false);
     setOpen(true);
     handleCloseMenu();
+    navigate('/')
   };
 
   const handleOpenRegister = () => {
@@ -58,6 +59,7 @@ export const Header = ({ setUser, currentPage }) => {
     setOpen(true);
     handleCloseMenu();
     setChecked(true);
+    navigate('/')
   };
 
   const handleClose = () => setOpen(false);
@@ -100,21 +102,21 @@ export const Header = ({ setUser, currentPage }) => {
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-            onClick={() => {navigate('/'); window.location.reload()}}
+            onClick={() => {navigate('/');}}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-            onClick={() => {navigate('/shop'); window.location.reload()}}
+            onClick={() => {navigate('/shop');}}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
             children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'}children="CONTACT" />}
-            onClick={() => {navigate('/contact'); window.location.reload()}}
+            onClick={() => {navigate('/contact');}}
           />
         </Box>
       </Box>
@@ -167,7 +169,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-                  onClick={() => {navigate('/'); window.location.reload()}}
+                  onClick={() => {navigate('/');}}
                 />
               }
             />
@@ -178,7 +180,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-                  onClick={() => {navigate('/shop'); window.location.reload()}}
+                  onClick={() => {navigate('/shop');}}
                 />
               }
             />
@@ -189,7 +191,7 @@ export const Header = ({ setUser, currentPage }) => {
                   variant="none"
                   sx={{ padding: "0.5em" }}
                   children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'} children="CONTACT" />}
-                  onClick={() => {navigate('/contact'); window.location.reload()}}
+                  onClick={() => {navigate('/contact');}}
                 />
               }
             />

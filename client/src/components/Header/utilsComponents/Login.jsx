@@ -2,10 +2,11 @@ import { Button, Typography, TextField, Switch } from "@mui/material";
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { login } from "../../../services/login";
+import { login } from "../../../services/login.js";
 import Alert from "@mui/material/Alert";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
+import {deleteOneCart, getAllCart} from '../../../services/cart.js'
 
 const validationSchema = yup.object({
   username: yup
@@ -40,7 +41,7 @@ export const Login = ({ checked, toggleChecked, setUser }) => {
           setAlert(true);
           setUser(response)
           window.location.reload()
-          setTimeout(() => {
+          setTimeout(async () => {
             navigate('/')
             setAlert(false);
           }, 3000);

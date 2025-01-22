@@ -40,7 +40,6 @@ router.post("/", async (req, res) => {
     if (!isActive) {
       return res.status(401).json({ error: "This user is not active." });
     }
-    console.log(body);
     const newCart = await Cart.create({ ...body, userId: user.id });
     return res.json(newCart);
   } catch (error) {
@@ -104,17 +103,13 @@ router.delete("/:id", async (req, res) => {
     if (!isActive) {
       return res.status(401).json({ error: "This user is not active." });
     }
-    const cart = await Cart.findByPk(req.params.id);
+    const cart = await Cart.findOne({where: {id: req.params.id}});
     if (cart.userId !== user.id) {
       return res
         .status(401)
-        .json({ error: "Only the creator of this cart can update it." });
+        .json({ error: "Only the creator of this cart can delete it." });
     }
-    if (!cart) {
-      return res
-        .status(400)
-        .json({ error: `The cart with id ${req.params.id} does not exists.` });
-    }
+
     await cart.destroy();
     return res.json("You have been sucessfully delete this cart.");
   } catch (error) {

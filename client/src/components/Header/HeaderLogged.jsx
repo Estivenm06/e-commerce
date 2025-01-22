@@ -18,6 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./utilsComponents/Search.jsx";
 import { logout } from "../../services/logout.js";
 import { useNavigate } from "react-router-dom";
+import { createOneCart } from "../../services/cart.js";
 
 export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
   const [visibility, setVisibility] = useState(false);
@@ -33,10 +34,20 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   const handleLogout = async () => {
+    const products = cart.map((item) => item);
+    await createOneCart(products);
     await logout();
+    setUser(null);
     localStorage.removeItem("userLogged");
-    setUser({});
-    window.location.reload();
+    localStorage.removeItem("userCart");
+    navigate('/')
+  };
+
+  const handleCart = async () => {
+    const products = cart.map((item) => item);
+    await createOneCart(products);
+    navigate("/cart");
+    localStorage.removeItem('userCart')
   };
 
   const CartBadge = styled(Badge)`
@@ -86,7 +97,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                 children="HOME"
               />
             }
-            onClick={() => {navigate("/"); window.location.reload()}}
+            onClick={() => {
+              navigate("/");
+            }}
           />
           <Button
             size="small"
@@ -100,7 +113,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                 children="SHOP"
               />
             }
-            onClick={() => {navigate("/shop"); window.location.reload()}}
+            onClick={() => {
+              navigate("/shop");
+            }}
           />
           <Button
             size="small"
@@ -114,7 +129,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                 children="CONTACT"
               />
             }
-            onClick={() => {navigate("/contact"); window.location.reload()}}
+            onClick={() => {
+              navigate("/contact");
+            }}
           />
         </Box>
       </Box>
@@ -187,7 +204,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                       children="HOME"
                     />
                   }
-                  onClick={() => {navigate("/"); window.location.reload()}}
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 />
               }
             />
@@ -205,7 +224,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                       children="SHOP"
                     />
                   }
-                  onClick={() => {navigate("/shop"); window.location.reload()}}
+                  onClick={() => {
+                    navigate("/shop");
+                  }}
                 />
               }
             />
@@ -225,7 +246,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
                       children="CONTACT"
                     />
                   }
-                  onClick={() => {navigate("/contact"); window.location.reload()}}
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
                 />
               }
             />
@@ -237,19 +260,20 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
               }
             />
             <MenuItem
-            sx={{display: currentPage === 'cart' ? 'none' : "flex"}}
+              sx={{ display: currentPage === "cart" ? "none" : "flex" }}
               children={
                 <IconButton
-                onClick={() => {navigate("/cart"); window.location.reload()}}
+                  onClick={() => handleCart()}
                 >
                   <ShoppingCartIcon sx={{ color: "orange" }} />
                   <CartBadge
-                    badgeContent={cart.length}
+                    badgeContent={cart?.length}
                     color="primary"
                     overlap="circular"
                   />
                 </IconButton>
-              } />
+              }
+            />
             <MenuItem
               children={
                 <Button
@@ -291,14 +315,18 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
               xs: "none",
               sm: "none",
               md: "none",
-              lg: currentPage === 'cart' ? 'none' : 'flex',
-              xl: currentPage === 'cart' ? 'none' : 'flex',
+              lg: currentPage === "cart" ? "none" : "flex",
+              xl: currentPage === "cart" ? "none" : "flex",
             },
           }}
-          onClick={() => {navigate("/cart"); window.location.reload()}}
+          onClick={() => handleCart()}
         >
           <ShoppingCartIcon sx={{ color: "orange" }} />
-          <CartBadge badgeContent={cart.length} color="primary" overlap="circular" />
+          <CartBadge
+            badgeContent={cart?.length}
+            color="primary"
+            overlap="circular"
+          />
         </IconButton>
         <Button
           onClick={handleLogout}
@@ -312,9 +340,9 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
             },
             border: "1px red solid",
             borderRadius: "0.5em",
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: '0.5em'
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "0.5em",
           }}
           children={<Typography children="LOG OUT" variant="button" />}
           size="small"

@@ -26,13 +26,13 @@ export const Product = ({ products, feature }) => {
   const getFilteredProducts = (feature) => {
     switch (feature) {
       case "recentListed":
-        return products.slice(0, 3);
+        return products.sort((a, b) => a.rating.count - b.rating.count).slice(0,3);
       case "lowerPrices":
         return products.sort((a,b) => a.price - b.price).slice(0, 3);
       case "topFeatured":
         return products.sort((a,b) => b.rating.rate - a.rating.rate).slice(0, 3);
       default:
-        return [];
+        return products;
     }
   };
 

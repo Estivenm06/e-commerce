@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getAll } from "./services/product.js";
-import { getAllCart } from "./services/cart.js";
+import { createOneCart, getAllCart } from "./services/cart.js";
 import { isTokenExpired } from "./utils/middleware.js";
 import { Home } from "./pages/Home.jsx";
 import { Shop } from "./pages/Shop.jsx";
@@ -9,27 +9,46 @@ import { Contact } from "./pages/Contact.jsx";
 import { Cart } from "./pages/Cart.jsx";
 import "./styles/index.scss";
 import { Box, CircularProgress, Typography } from "@mui/material";
+import { deleteOneCart } from "./services/cart.js";
 
 export const App = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState(() => {
-    const storedCart = JSON.parse(localStorage.getItem("userCart"));
-    return storedCart ? storedCart : [];
-  });
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const handleAddToCart = (item) => {
-    const isAlready = cart.some((i) => i.id === item.id);
-    if (isAlready) {
-      alert("This product is already in the cart.");
+    const isAlreadyInCart = cart.some(
+      (cartItem) => cartItem.item.id === item.id
+    );
+    if (isAlreadyInCart) {
+      setCart((prevCart) =>
+        prevCart.map((cartItem) =>
+          cartItem.item.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+      localStorage.setItem(
+        "userCart",
+        JSON.stringify(
+          cart.map((cartItem) =>
+            cartItem.item.id === item.id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem
+          )
+        )
+      );
+      alert("You added more quantity of this item.");
     } else {
-      setCart([...cart, item]);
-      const existingCart = JSON.parse(localStorage.getItem("userCart")) || [];
-      const updatedCart = [...existingCart, item];
-      localStorage.setItem("userCart", JSON.stringify(updatedCart));
+      setCart([...cart, { item, quantity: 1 }]);
+      localStorage.setItem(
+        "userCart",
+        JSON.stringify([...cart, { item, quantity: 1 }])
+      );
       alert("You have been insert this product.");
     }
   };
@@ -39,29 +58,49 @@ export const App = () => {
       try {
         setLoading(false);
         setError(null);
-
+        const fetchedProducts = await getAll();
+        if (fetchedProducts) {
+          setProducts(fetchedProducts);
+        }
         if (localStorage.getItem("userLogged")) {
           const storedUser = JSON.parse(localStorage.getItem("userLogged"));
           const token = storedUser.token;
+          const products = cart.map((item) => item);
+          const cartDatabase = async () => {
+            try{
+              const fetchedCart = await getAllCart(storedUser.id);
+              const storedCart = JSON.parse(localStorage.getItem("userCart"));
+              if (storedCart) {
+                setCart(storedCart);
+              }
+              if (fetchedCart.length !== 0 && location.pathname === '/') {
+                localStorage.setItem(
+                  "userCart",
+                  JSON.stringify(fetchedCart[0].products)
+                );
+                setCart(fetchedCart[0].products);
+                await deleteOneCart(fetchedCart[0].id)
+              }
+              if (fetchedCart.length !== 0 && location.pathname === '/cart') {
+                localStorage.setItem(
+                  "userCart",
+                  JSON.stringify(fetchedCart[0].products)
+                );
+                setCart(fetchedCart[0].products);
+              }
+            }catch(error){
+              console.log(error);
+            }
+          };
           if (isTokenExpired(token)) {
+            await createOneCart(products);
             localStorage.removeItem("userLogged");
             localStorage.removeItem("userCart");
             setUser(null);
             navigate("/");
           } else {
             setUser(storedUser);
-          }
-        }
-        const fetchedProducts = await getAll();
-        if (fetchedProducts) {
-          setProducts(fetchedProducts);
-        }
-        if (user) {
-          const fetchedCarts = await getAllCart(user.id);
-          if (fetchedCarts instanceof Error) {
-            throw fetchedCarts;
-          } else {
-            setCart(fetchedCarts);
+            cartDatabase();
           }
         }
       } catch (error) {

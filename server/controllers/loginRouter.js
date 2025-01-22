@@ -9,7 +9,8 @@ const scheduleActivationDeletion = async (activeId, expirationTime) => {
   try{
     const deletionDate = new Date(Date.now() + expirationTime)
     console.log(`Scheduling deletion of Active ID ${activeId} for ${deletionDate}`);
-    schedule.scheduleJob(deletionDate, async () => {
+    const deleteAt = new Date(deletionDate) 
+    schedule.scheduleJob(deleteAt, async () => {
       try{
         const deletedCount = await Active.destroy({where: {
           id: activeId
@@ -54,7 +55,7 @@ router.post("/", async (req, res) => {
       name: user.name,
     };
   
-    const token = jwt.sign(userForToken, SECRET, { expiresIn: 60 * 60 });
+    const token = jwt.sign(userForToken, SECRET, { expiresIn: '1h' });
   
     const isActive = await Active.findOne({where: {userId: user.id}})
     
@@ -72,10 +73,10 @@ router.post("/", async (req, res) => {
     await scheduleActivationDeletion(active.id, expirationTime);
   
     return res
-      .status(201)
+      .status(200)
       .json({ token, username: user.username, name: user.name, active: true, id: user.id});
   }catch{
-    return res.status(400).json({error: 'The request could not be completed.'})
+    return res.status(500).json({error: 'The request could not be completed.'})
   }
 });
 

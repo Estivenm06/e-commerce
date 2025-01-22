@@ -6,7 +6,8 @@ import { Right } from "./RightSide";
 
 const Content = ({ products }) => {
   if (!products || products.length === 0) return null;
-  const mostRated = products.find((product) => Math.max(product.rating.rate));
+  const mostRated = products.sort((a, b) => b.rating.rate - a.rating.rate).slice(0,1)
+  console.log(mostRated);
   return (
     <Container
       maxWidth='xl'
@@ -46,7 +47,7 @@ const Content = ({ products }) => {
               },
             }}
           >
-            <Right mostRated={mostRated} />
+            <Right mostRated={mostRated[0]} />
           </Box>
         </Grid>
       </Grid>
