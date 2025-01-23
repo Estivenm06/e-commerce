@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Menu from "../components/Menu/index.jsx";
 import Header from "../components/Header/index.jsx";
-import ShopIndex from "../components/Shop/index.jsx";
+import CartIndex from "../components/Cart/index.jsx";
 import { Divider, Container, CssBaseline, Box } from "@mui/material";
 import { Alert } from "../components/Error/Alert.jsx";
 
-export const Shop = ({
-  user,
-  setUser,
-  products,
-  cart,
-  setCart,
-  handleAddToCart,
-  alert,
-  setAlert,
-}) => {
-  const [pageHeader, setPageHeader] = useState("shop");
+export const Cart = ({ user, setUser, cart, alert, setAlert }) => {
+  const [currentPage, setCurrentPage] = useState("cart");
   return (
     <Container
       maxWidth={false}
@@ -28,17 +19,12 @@ export const Shop = ({
       <Header
         user={user}
         setUser={setUser}
-        currentPage={pageHeader}
         cart={cart}
+        currentPage={currentPage}
       />
       <Divider />
-      <ShopIndex
-        products={products}
-        user={user}
-        setCart={setCart}
-        cart={cart}
-        handleAddToCart={handleAddToCart}
-      />
+      <CartIndex cart={cart} />
+      <Divider />
       {alert ? (
         <Box
           sx={{

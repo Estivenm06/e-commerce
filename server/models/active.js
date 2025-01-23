@@ -16,9 +16,8 @@ Active.init(
       references: { model: "users", key: "id" },
     },
     active: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: false,
     },
   },
   { sequelize, underscored: true, timestamps: false, tableName: "actives" }

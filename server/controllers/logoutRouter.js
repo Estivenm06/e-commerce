@@ -6,11 +6,19 @@ const {SECRET} = require('../utils/config.js')
 router.post("/", async (req, res) => {
   try {
     const authorization = req.get('authorization')
-    let decodedToken;
     if(authorization && authorization.toLocaleLowerCase().startsWith('bearer')){
-      decodedToken = jwt.verify(authorization.substring(7), SECRET)
+      try{
+        req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+      }catch{
+        return res.status(400).json({error: 'invalid token'})
+      }
+    }else{
+      return res.status(400).json({error: 'token missing'})
     }
-    const user = await User.findByPk(decodedToken.id);
+    const user = await User.findByPk(req.decodedToken.id);
+    if(!user){
+      return res.status(400).json({error: "There's no user"})
+    }
     const active = await Active.findOne({ where: { userId: user.id } });
     if (!active) {
       return res.status(400).json({ error: "This user is not active." });
@@ -19,7 +27,7 @@ router.post("/", async (req, res) => {
     return res.json("You have been log out successfully.");
   } catch {
     return res
-      .status(400)
+      .status(500)
       .json({ error: "An error occurred while trying to log out." });
   }
 });

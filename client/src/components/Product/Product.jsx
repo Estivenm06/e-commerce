@@ -1,9 +1,5 @@
 import React from "react";
-
 import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
   Typography,
   Box
 } from "@mui/material";
@@ -27,22 +23,27 @@ const Price = ({ price }) => {
 };
 
 export const Product = ({ products, feature }) => {
-  const getFilteredProducts = () => {
+  const getFilteredProducts = (feature) => {
     switch (feature) {
       case "recentListed":
-        return products.slice(0, 3);
+        return products.sort((a, b) => a.rating.count - b.rating.count).slice(0,3);
       case "lowerPrices":
-        return products.filter((item) => item.price < 20).slice(0, 3);
+        return products.sort((a,b) => a.price - b.price).slice(0, 3);
       case "topFeatured":
-        return products.filter((item) => item.rating.rate > 4).slice(0, 3);
+        return products.sort((a,b) => b.rating.rate - a.rating.rate).slice(0, 3);
       default:
-        return [];
+        return products;
     }
   };
 
-  const filteredProducts = getFilteredProducts();
+  const filteredProducts = getFilteredProducts(feature);
   if (!filteredProducts || filteredProducts.length === 0) {
     return <Typography>"No products found for this category"</Typography>;
+  }
+
+  const truncateTitle = (title) => {
+    const keywords = title.split(/\s+/).slice(0, 3).join(' ')
+    return keywords
   }
 
   return (
@@ -55,10 +56,10 @@ export const Product = ({ products, feature }) => {
                         src={`${item.image}?w=248&fit=crop&auto=format`}
                         alt={item.title}
                         loading="lazy"
-                        style={{ width: "200px", height: "250px", objectFit: "fill"}}
+                        style={{ width: "200px", height: "250px", objectFit: "contain"}}
                     />
                     <Box sx={{ padding: '1em', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography variant="h6">{item.title}</Typography>
+                        <Typography variant="h6" children={truncateTitle(item.title)}/>
                         <Price price={item.price} />
                     </Box>
                 </Box>

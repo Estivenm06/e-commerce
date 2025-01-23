@@ -1,19 +1,79 @@
-import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
-import Grid from '@mui/material/Grid2'
-import {Pagination,ImageList, ImageListItem} from '@mui/material'
+import React from "react";
+import { Box, Pagination } from "@mui/material";
+import { ListMode, WindowMode } from "./Product";
 
-export const Products = ({products, limit, displayedProducts, setCurrentPage, currentPage}) => {
+export const Products = ({
+  products,
+  limit,
+  displayedProducts,
+  setCurrentPage,
+  currentPage,
+  visual,
+  user,
+  setCart,
+  cart,
+  handleAddToCart
+}) => {
+  
+  const handleChangePage = (event, newPage) => {
+    setCurrentPage(newPage);
+  };
 
-    const handleChangePage = (event, newPage) => {
-        setCurrentPage(newPage)
+  const paddingPX = (limit) => {
+    switch (limit) {
+      case 12:
+        return "20em";
+      case 8:
+        return "10em";
+      case 10:
+        return "3em";
+      default:
+        return "";
     }
-    return (
-        <Box sx={{display: 'flex', marginTop: '4%', paddingInline: '2em', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-            <Grid container spacing={2}>
-            {displayedProducts.map(item => <Grid key={item.id} xs={12} md={4} lg={3}><p>{item.id}</p></Grid>)}
-            </Grid>
-            <Pagination count={Math.ceil(products.length / limit)} color='primary' page={currentPage} onChange={handleChangePage}/>
-        </Box>
-    )
-}
+  };
+
+  const styleWindow = {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
+    px: {xl: paddingPX(limit)},
+  }
+
+  const styleList = {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingInline: '2em',
+    flexWrap: 'wrap',
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        paddingInline: "2em",
+        flexDirection: "column",
+        py: '4em',
+      }}
+      gap={'2em'}
+    >
+      <Box
+        sx={visual === 'window' ? styleWindow : styleList}
+      >
+        {displayedProducts.map((item) => visual === 'window' ? <WindowMode item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart}/> : <ListMode item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart}/>)}
+      </Box>
+      <Pagination
+        count={Math.ceil(products.length / limit)}
+        color="primary"
+        page={currentPage}
+        onChange={handleChangePage}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+      />
+    </Box>
+  );
+};

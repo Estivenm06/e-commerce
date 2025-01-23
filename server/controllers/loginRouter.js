@@ -4,12 +4,14 @@ const { User, Active } = require("../models");
 const bcrypt = require("bcrypt");
 const { SECRET } = require("../utils/config.js");
 const schedule = require('node-schedule')
+const {jwtDecode} = require('jwt-decode')
 
 const scheduleActivationDeletion = async (activeId, expirationTime) => {
   try{
     const deletionDate = new Date(Date.now() + expirationTime)
     console.log(`Scheduling deletion of Active ID ${activeId} for ${deletionDate}`);
-    schedule.scheduleJob(deletionDate, async () => {
+    const deleteAt = new Date(deletionDate) 
+    schedule.scheduleJob(deleteAt, async () => {
       try{
         const deletedCount = await Active.destroy({where: {
           id: activeId
@@ -54,15 +56,21 @@ router.post("/", async (req, res) => {
       name: user.name,
     };
   
-    const token = jwt.sign(userForToken, SECRET, { expiresIn: 60 * 60 });
+    const token = jwt.sign(userForToken, SECRET, { expiresIn: '1h' });
   
     const isActive = await Active.findOne({where: {userId: user.id}})
     
     if(isActive){
-      return res.status(401).json({error: 'The user is currently active.'})
+      const decodedToken = jwtDecode(isActive.dataValues.active)
+      const currentTime = Date.now() / 1000
+      if(decodedToken.exp < currentTime){
+        await isActive.destroy()
+      }else{
+        return res.status(401).json({error: 'The user is currently active.'})
+      }
     }
   
-    const active = await Active.create({userId: user.id, active: true})
+    const active = await Active.create({userId: user.id, active: token})
     
     if(!active){
       return res.status(401).json({error: 'This user cannot be active.'})
@@ -72,10 +80,10 @@ router.post("/", async (req, res) => {
     await scheduleActivationDeletion(active.id, expirationTime);
   
     return res
-      .status(201)
-      .json({ token, username: user.username, name: user.name, active: true });
+      .status(200)
+      .json({ token, username: user.username, name: user.name, active: true, id: user.id});
   }catch{
-    return res.status(400).json({error: 'The request could not be completed.'})
+    return res.status(500).json({error: 'The request could not be completed.'})
   }
 });
 

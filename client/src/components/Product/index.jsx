@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Header } from "./Header";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { Product } from "./Product";
 
 const Index = ({ products }) => {
   const [feature, setFeature] = useState("recentListed");
-  if (!products) {
-    return null;
+  if (!products || products.length === 0) {
+    return null
   }
 
   const toggleFeature = (option) => {

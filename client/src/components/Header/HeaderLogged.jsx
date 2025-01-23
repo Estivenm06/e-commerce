@@ -8,15 +8,19 @@ import {
   TextField,
   Avatar,
   Button,
+  Badge,
+  styled,
 } from "@mui/material";
+import { badgeClasses } from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./utilsComponents/Search.jsx";
 import { logout } from "../../services/logout.js";
 import { useNavigate } from "react-router-dom";
+import { createOneCart } from "../../services/cart.js";
 
-export const HeaderLogged = ({ user, setUser, currentPage }) => {
+export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
   const [visibility, setVisibility] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -30,11 +34,28 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   const handleLogout = async () => {
+    const products = cart.map((item) => item);
+    await createOneCart(products);
     await logout();
+    setUser(null);
     localStorage.removeItem("userLogged");
-    setUser({});
-    window.location.reload();
+    localStorage.removeItem("userCart");
+    navigate('/')
   };
+
+  const handleCart = async () => {
+    const products = cart.map((item) => item);
+    await createOneCart(products);
+    navigate("/cart");
+    localStorage.removeItem('userCart')
+  };
+
+  const CartBadge = styled(Badge)`
+    & .${badgeClasses.badge} {
+      top: -12px;
+      rigth: -6px;
+    }
+  `;
 
   return (
     <>
@@ -76,7 +97,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                 children="HOME"
               />
             }
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/");
+            }}
           />
           <Button
             size="small"
@@ -90,7 +113,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                 children="SHOP"
               />
             }
-            onClick={() => navigate("/shop")}
+            onClick={() => {
+              navigate("/shop");
+            }}
           />
           <Button
             size="small"
@@ -104,7 +129,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                 children="CONTACT"
               />
             }
-            onClick={() => navigate("/contact")}
+            onClick={() => {
+              navigate("/contact");
+            }}
           />
         </Box>
       </Box>
@@ -177,7 +204,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                       children="HOME"
                     />
                   }
-                  onClick={() => navigate("/")}
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 />
               }
             />
@@ -195,7 +224,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                       children="SHOP"
                     />
                   }
-                  onClick={() => navigate("/shop")}
+                  onClick={() => {
+                    navigate("/shop");
+                  }}
                 />
               }
             />
@@ -215,7 +246,9 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
                       children="CONTACT"
                     />
                   }
-                  onClick={() => navigate("/contact")}
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
                 />
               }
             />
@@ -227,10 +260,18 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
               }
             />
             <MenuItem
+              sx={{ display: currentPage === "cart" ? "none" : "flex" }}
               children={
                 <IconButton
-                  children={<ShoppingCartIcon sx={{ color: "orange" }} />}
-                />
+                  onClick={() => handleCart()}
+                >
+                  <ShoppingCartIcon sx={{ color: "orange" }} />
+                  <CartBadge
+                    badgeContent={cart?.length}
+                    color="primary"
+                    overlap="circular"
+                  />
+                </IconButton>
               }
             />
             <MenuItem
@@ -268,21 +309,25 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
           }}
         />
         <IconButton
-          children={
-            <ShoppingCartIcon
-              sx={{
-                color: "orange",
-                display: {
-                  xs: "none",
-                  sm: "none",
-                  md: "none",
-                  lg: "block",
-                  xl: "block",
-                },
-              }}
-            />
-          }
-        />
+          sx={{
+            marginRight: "1em",
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: currentPage === "cart" ? "none" : "flex",
+              xl: currentPage === "cart" ? "none" : "flex",
+            },
+          }}
+          onClick={() => handleCart()}
+        >
+          <ShoppingCartIcon sx={{ color: "orange" }} />
+          <CartBadge
+            badgeContent={cart?.length}
+            color="primary"
+            overlap="circular"
+          />
+        </IconButton>
         <Button
           onClick={handleLogout}
           sx={{
@@ -290,11 +335,14 @@ export const HeaderLogged = ({ user, setUser, currentPage }) => {
               xs: "none",
               sm: "none",
               md: "none",
-              lg: "block",
-              xl: "block",
+              lg: "flex",
+              xl: "flex",
             },
             border: "1px red solid",
             borderRadius: "0.5em",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "0.5em",
           }}
           children={<Typography children="LOG OUT" variant="button" />}
           size="small"

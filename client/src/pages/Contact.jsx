@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Menu from "../components/Menu/index.jsx";
-import Header from '../components/Header/index.jsx'
-import { Divider, Container, CssBaseline } from "@mui/material";
+import Header from "../components/Header/index.jsx";
+import { Divider, Container, CssBaseline, Box } from "@mui/material";
+import { Alert } from "../components/Error/Alert.jsx";
 
-export const Contact = ({user, setUser}) => {
-  const [currentPage, setCurrentPage] = useState('contact')
+export const Contact = ({ user, setUser, cart, setAlert, alert }) => {
+  const [currentPage, setCurrentPage] = useState("contact");
   return (
     <Container
       maxWidth={false}
@@ -14,9 +15,29 @@ export const Contact = ({user, setUser}) => {
       <CssBaseline />
       <Menu />
       <Divider />
-      <Header user={user} setUser={setUser} currentPage={currentPage}/>
+      <Header
+        user={user}
+        setUser={setUser}
+        currentPage={currentPage}
+        cart={cart}
+      />
       <Divider />
       <Divider />
+      {alert ? (
+        <Box
+          sx={{
+            position: 'fixed',
+            bottom: '1em',
+            left: '1em',
+            zIndex: 1000,
+            display: "inline-flex",
+            padding: "1em",
+            borderRadius: "0.5em",
+          }}
+        >
+          <Alert alert={alert} />
+        </Box>
+      ) : null}
     </Container>
   );
 };
