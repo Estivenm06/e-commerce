@@ -14,9 +14,8 @@ module.exports = {
                 references: {model: 'users', key: 'id'}
             },
             active: {
-                type: DataTypes.BOOLEAN,
+                type: DataTypes.TEXT,
                 allowNull: false,
-                defaultValue: false
             }
         })
     },

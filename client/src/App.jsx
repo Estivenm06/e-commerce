@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getAll } from "./services/product.js";
-import { createOneCart, getAllCart } from "./services/cart.js";
-import { isTokenExpired } from "./utils/middleware.js";
+import { getAllCart } from "./services/cart.js";
+import {
+  isTokenExpired,
+  handleTokenExpiration,
+  getToken,
+} from "./utils/middleware.js";
 import { Home } from "./pages/Home.jsx";
 import { Shop } from "./pages/Shop.jsx";
 import { Contact } from "./pages/Contact.jsx";
@@ -13,12 +17,12 @@ import { deleteOneCart } from "./services/cart.js";
 
 export const App = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [alert, setAlert] = useState(null);
+  console.log(alert);
 
   const handleAddToCart = (item) => {
     const isAlreadyInCart = cart.some(
@@ -42,14 +46,26 @@ export const App = () => {
           )
         )
       );
-      alert("You added more quantity of this item.");
+      setAlert({
+        message: "You added more quantity of this item.",
+        type: "success",
+      });
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
     } else {
       setCart([...cart, { item, quantity: 1 }]);
       localStorage.setItem(
         "userCart",
         JSON.stringify([...cart, { item, quantity: 1 }])
       );
-      alert("You have been insert this product.");
+      setAlert({
+        message: "You have been insert this product.",
+        type: "success",
+      });
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
     }
   };
 
@@ -57,59 +73,64 @@ export const App = () => {
     const fetchData = async () => {
       try {
         setLoading(false);
-        setError(null);
+
         const fetchedProducts = await getAll();
         if (fetchedProducts) {
           setProducts(fetchedProducts);
         }
+
         if (localStorage.getItem("userLogged")) {
-          const storedUser = JSON.parse(localStorage.getItem("userLogged"));
-          const token = storedUser.token;
-          const products = cart.map((item) => item);
-          const cartDatabase = async () => {
-            try{
-              const fetchedCart = await getAllCart(storedUser.id);
-              const storedCart = JSON.parse(localStorage.getItem("userCart"));
-              if (storedCart) {
-                setCart(storedCart);
-              }
-              if (fetchedCart.length !== 0 && location.pathname === '/') {
-                localStorage.setItem(
-                  "userCart",
-                  JSON.stringify(fetchedCart[0].products)
-                );
-                setCart(fetchedCart[0].products);
-                await deleteOneCart(fetchedCart[0].id)
-              }
-              if (fetchedCart.length !== 0 && location.pathname === '/cart') {
-                localStorage.setItem(
-                  "userCart",
-                  JSON.stringify(fetchedCart[0].products)
-                );
-                setCart(fetchedCart[0].products);
-              }
-            }catch(error){
-              console.log(error);
+          try {
+            const storedUser = JSON.parse(localStorage.getItem("userLogged"));
+            const fetchedCart = await getAllCart(storedUser.id);
+            const storedCart = JSON.parse(localStorage.getItem("userCart"));
+
+            if (storedUser) {
+              setUser(storedUser);
             }
-          };
-          if (isTokenExpired(token)) {
-            await createOneCart(products);
-            localStorage.removeItem("userLogged");
-            localStorage.removeItem("userCart");
-            setUser(null);
-            navigate("/");
-          } else {
-            setUser(storedUser);
-            cartDatabase();
+
+            if(storedCart){
+              setCart(storedCart)
+            }
+
+            if (fetchedCart.length === 1) {
+              const cartData = fetchedCart[0].products;
+              localStorage.setItem("userCart", JSON.stringify(cartData));
+              setCart(cartData);
+              await deleteOneCart(fetchedCart[0].id);
+            }
+          } catch (error) {
+            console.error("Error fetching cart Database", error);
+            setAlert({
+              message: "An error occurred while loading cart data.",
+              type: "error",
+            });
+            setTimeout(() => {
+              setAlert(null);
+            }, 2000);
           }
+        }
+
+        const token = getToken();
+
+        if (localStorage.getItem("userLogged") && isTokenExpired(token)) {
+          handleTokenExpiration(cart, navigate, setUser, setCart);
+          return;
         }
       } catch (error) {
         console.error("Error fetching app data", error);
-        setError("An error occurred while loading data.");
+        setAlert({
+          message: "An error occurred while loading data.",
+          type: "error",
+        });
+        setTimeout(() => {
+          setAlert(null);
+        }, 2000);
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
   }, [navigate]);
 
@@ -129,10 +150,6 @@ export const App = () => {
     );
   }
 
-  if (error) {
-    return <Typography color="error">{error}</Typography>;
-  }
-
   return (
     <>
       <Routes>
@@ -145,6 +162,8 @@ export const App = () => {
                 setUser={setUser}
                 user={user}
                 cart={cart}
+                alert={alert}
+                setAlert={setAlert}
               />
             }
           />
@@ -158,16 +177,34 @@ export const App = () => {
                 cart={cart}
                 setCart={setCart}
                 handleAddToCart={handleAddToCart}
+                alert={alert}
+                setAlert={setAlert}
               />
             }
           />
           <Route
             path="contact"
-            element={<Contact user={user} setUser={setUser} cart={cart} />}
+            element={
+              <Contact
+                user={user}
+                setUser={setUser}
+                cart={cart}
+                alert={alert}
+                setAlert={setAlert}
+              />
+            }
           />
           <Route
             path="cart"
-            element={<Cart user={user} setUser={setUser} cart={cart} />}
+            element={
+              <Cart
+                user={user}
+                setUser={setUser}
+                cart={cart}
+                alert={alert}
+                setAlert={setAlert}
+              />
+            }
           />
         </Route>
       </Routes>

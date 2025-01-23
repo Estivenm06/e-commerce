@@ -4,9 +4,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { login } from "../../../services/login.js";
 import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
-import {deleteOneCart, getAllCart} from '../../../services/cart.js'
 
 const validationSchema = yup.object({
   username: yup
@@ -16,7 +14,6 @@ const validationSchema = yup.object({
 });
 
 export const Login = ({ checked, toggleChecked, setUser }) => {
-  const [alert, setAlert] = useState(false);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate()
@@ -38,13 +35,8 @@ export const Login = ({ checked, toggleChecked, setUser }) => {
         const response = await login(user).catch(error => {setError(true); setMessage(error.response.data.error); setTimeout(() => {setError(false); setMessage(null)}, 3000)})
         if (response) {
           localStorage.setItem("userLogged", JSON.stringify(response));
-          setAlert(true);
           setUser(response)
-          window.location.reload()
-          setTimeout(async () => {
-            navigate('/')
-            setAlert(false);
-          }, 3000);
+          navigate('/')
         }
       }catch(error){
         setError(true)
@@ -92,11 +84,6 @@ export const Login = ({ checked, toggleChecked, setUser }) => {
         Do not have an account?{" "}
         <Switch checked={checked} onChange={() => toggleChecked()} />
       </Typography>
-      {alert && (
-        <Alert severity="success" icon={<CheckIcon />}>
-          You have been loggin successfully
-        </Alert>
-      )}
       {error && <Alert severity="error">{message}</Alert>}
       <Button
         type="submit"
