@@ -45,7 +45,7 @@ export const Header = ({
           children={<ArrowBackIcon sx={{ color: "white" }} />}
           onClick={() => handleBack()}
         />
-        <Typography children="Continue shopping" variant="h6" />
+        <Typography children="Continue shopping" variant="h5" sx={{fontWeight: 'bold'}} />
       </Box>
       <Divider flexItem sx={{ backgroundColor: "white" }} />
       <Box

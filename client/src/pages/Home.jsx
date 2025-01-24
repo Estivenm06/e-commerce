@@ -6,7 +6,7 @@ import Product from "../components/Product/index.jsx";
 import { Container, Divider, CssBaseline, Box } from "@mui/material";
 import { Alert } from "../components/Error/Alert.jsx";
 
-export const Home = ({ products, setUser, user, cart, alert, setAlert }) => {
+export const Home = ({ products, setUser, user, cart, alert, setAlert, filter, setFilter, filteredData }) => {
   const [currentPage, setCurrentPage] = useState("/");
   return (
     <Container
@@ -22,9 +22,13 @@ export const Home = ({ products, setUser, user, cart, alert, setAlert }) => {
         user={user}
         currentPage={currentPage}
         cart={cart}
+        setAlert={setAlert}
+        filter={filter}
+        setFilter={setFilter}
+        filteredData={filteredData}
       />
       <Divider />
-      <Content products={products} />
+      <Content products={products} setAlert={setAlert} user={user} />
       <Divider />
       <Product products={products} />
       <Divider />

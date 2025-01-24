@@ -10,10 +10,12 @@ export const Shop = ({
   setUser,
   products,
   cart,
-  setCart,
   handleAddToCart,
   alert,
   setAlert,
+  setFilter,
+  filteredData,
+  filter
 }) => {
   const [pageHeader, setPageHeader] = useState("shop");
   return (
@@ -30,14 +32,18 @@ export const Shop = ({
         setUser={setUser}
         currentPage={pageHeader}
         cart={cart}
+        setAlert={setAlert}
+        filter={filter}
+        filteredData={filteredData}
+        setFilter={setFilter}
       />
       <Divider />
       <ShopIndex
         products={products}
         user={user}
-        setCart={setCart}
         cart={cart}
         handleAddToCart={handleAddToCart}
+        setAlert={setAlert}
       />
       {alert ? (
         <Box

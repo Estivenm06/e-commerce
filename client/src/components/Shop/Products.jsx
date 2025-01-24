@@ -11,8 +11,8 @@ export const Products = ({
   visual,
   user,
   setCart,
-  cart,
-  handleAddToCart
+  handleAddToCart,
+  setAlert,
 }) => {
   
   const handleChangePage = (event, newPage) => {
@@ -65,7 +65,7 @@ export const Products = ({
       <Box
         sx={visual === 'window' ? styleWindow : styleList}
       >
-        {displayedProducts.map((item) => visual === 'window' ? <WindowMode item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart}/> : <ListMode item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart}/>)}
+        {displayedProducts.map((item) => visual === 'window' ? <WindowMode item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart} setAlert={setAlert}/> : <ListMode setAlert={setAlert} item={item} key={item.id} user={user} setCart={setCart} handleAddToCart={handleAddToCart}/>)}
       </Box>
       <Pagination
         count={Math.ceil(products.length / limit)}
