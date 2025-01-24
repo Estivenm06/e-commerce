@@ -14,6 +14,7 @@ import { Cart } from "./pages/Cart.jsx";
 import "./styles/index.scss";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { deleteOneCart } from "./services/cart.js";
+import { isEqual } from "lodash";
 
 export const App = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const App = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState(null);
-  console.log(alert);
+  const [filter, setFilter] = useState('');
 
   const handleAddToCart = (item) => {
     const isAlreadyInCart = cart.some(
@@ -50,9 +51,7 @@ export const App = () => {
         message: "You added more quantity of this item.",
         type: "success",
       });
-      setTimeout(() => {
-        setAlert(null);
-      }, 2000);
+      setTimeout(() => setAlert(null), 2000);
     } else {
       setCart([...cart, { item, quantity: 1 }]);
       localStorage.setItem(
@@ -63,9 +62,7 @@ export const App = () => {
         message: "You have been insert this product.",
         type: "success",
       });
-      setTimeout(() => {
-        setAlert(null);
-      }, 2000);
+      setTimeout(() => setAlert(null), 2000);
     }
   };
 
@@ -79,53 +76,50 @@ export const App = () => {
           setProducts(fetchedProducts);
         }
 
-        if (localStorage.getItem("userLogged")) {
-          try {
-            const storedUser = JSON.parse(localStorage.getItem("userLogged"));
-            const fetchedCart = await getAllCart(storedUser.id);
-            const storedCart = JSON.parse(localStorage.getItem("userCart"));
-
-            if (storedUser) {
-              setUser(storedUser);
-            }
-
-            if(storedCart){
-              setCart(storedCart)
-            }
-
-            if (fetchedCart.length === 1) {
-              const cartData = fetchedCart[0].products;
-              localStorage.setItem("userCart", JSON.stringify(cartData));
-              setCart(cartData);
-              await deleteOneCart(fetchedCart[0].id);
-            }
-          } catch (error) {
-            console.error("Error fetching cart Database", error);
-            setAlert({
-              message: "An error occurred while loading cart data.",
-              type: "error",
-            });
-            setTimeout(() => {
-              setAlert(null);
-            }, 2000);
-          }
-        }
-
         const token = getToken();
 
         if (localStorage.getItem("userLogged") && isTokenExpired(token)) {
           handleTokenExpiration(cart, navigate, setUser, setCart);
           return;
         }
+
+        const storedUser = JSON.parse(localStorage.getItem('userLogged'))
+
+        setUser(storedUser)
+
+        if(storedUser){
+          try{
+            const fetchedCart = await getAllCart(storedUser.id)
+            const storedCart = JSON.parse(localStorage.getItem('userCart'))
+
+            setCart(storedCart || [])
+
+            if(fetchedCart.length  === 1){
+              const cartData = fetchedCart[0].products
+              if(!isEqual(storedCart, cartData)){
+                localStorage.setItem('userCart', JSON.stringify(cartData))
+                setCart(cartData)
+                await deleteOneCart(fetchedCart[0].id)
+              }
+
+            }
+          }catch(error){
+            console.error("Error fetching cart Database", error);
+            setAlert({
+              message: "An error occurred while loading cart data.",
+              type: "error",
+            });
+            setTimeout(() => setAlert(null), 2000);
+          }
+        }
+
       } catch (error) {
         console.error("Error fetching app data", error);
         setAlert({
           message: "An error occurred while loading data.",
           type: "error",
         });
-        setTimeout(() => {
-          setAlert(null);
-        }, 2000);
+        setTimeout(() => setAlert(null), 2000);
       } finally {
         setLoading(false);
       }
@@ -150,6 +144,9 @@ export const App = () => {
     );
   }
 
+  const filteredData = filter && products.filter(item => item.title.toLowerCase().includes(filter.toLocaleLowerCase())).slice(0, 2)
+  console.log(filteredData);
+
   return (
     <>
       <Routes>
@@ -164,6 +161,9 @@ export const App = () => {
                 cart={cart}
                 alert={alert}
                 setAlert={setAlert}
+                filter={filter}
+                setFilter={setFilter}
+                filteredData={filteredData}
               />
             }
           />
@@ -179,6 +179,9 @@ export const App = () => {
                 handleAddToCart={handleAddToCart}
                 alert={alert}
                 setAlert={setAlert}
+                filter={filter}
+                setFilter={setFilter}
+                filteredData={filteredData}
               />
             }
           />
@@ -191,6 +194,9 @@ export const App = () => {
                 cart={cart}
                 alert={alert}
                 setAlert={setAlert}
+                filter={filter}
+                setFilter={setFilter}
+                filteredData={filteredData}
               />
             }
           />
@@ -203,6 +209,10 @@ export const App = () => {
                 cart={cart}
                 alert={alert}
                 setAlert={setAlert}
+                setCart={setCart}
+                filter={filter}
+                setFilter={setFilter}
+                filteredData={filteredData}
               />
             }
           />

@@ -7,6 +7,7 @@ import {
   Button,
   IconButton,
   TextField,
+  Paper,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -16,10 +17,17 @@ import { Register } from "./utilsComponents/Register.jsx";
 import { ModalOverflow, ModalClose, ModalDialog, Modal } from "@mui/joy";
 import { Search } from "./utilsComponents/Search.jsx";
 import SearchIcon from "@mui/icons-material/Search";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { ListFilter } from "./utilsComponents/ListFilter.jsx";
 
-export const Header = ({ setUser, currentPage }) => {
-  const [visibility, setVisibility] = useState(false);
+export const Header = ({
+  setUser,
+  currentPage,
+  setAlert,
+  filter,
+  setFilter,
+  filteredData,
+}) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [checked, setChecked] = useState(false);
@@ -51,7 +59,7 @@ export const Header = ({ setUser, currentPage }) => {
     setChecked(false);
     setOpen(true);
     handleCloseMenu();
-    navigate('/')
+    navigate("/");
   };
 
   const handleOpenRegister = () => {
@@ -59,18 +67,14 @@ export const Header = ({ setUser, currentPage }) => {
     setOpen(true);
     handleCloseMenu();
     setChecked(true);
-    navigate('/')
+    navigate("/");
   };
 
   const handleClose = () => setOpen(false);
 
-  const toggleVisibility = () => setVisibility((prev) => !prev);
-
   return (
     <>
-      <Box
-        sx={{ display: "flex" }}
-      >
+      <Box sx={{ display: "inline-flex", justifyContent: "flex-start" }}>
         {/*IMAGE LOGO */}
         <img
           src={"../../resources/LOGO.webp"}
@@ -101,51 +105,108 @@ export const Header = ({ setUser, currentPage }) => {
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-            onClick={() => {navigate('/');}}
+            children={
+              <Typography
+                className={currentPage === "/" ? "headerActive" : "textHeader"}
+                children="HOME"
+              />
+            }
+            onClick={() => {
+              navigate("/");
+            }}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-            onClick={() => {navigate('/shop');}}
+            children={
+              <Typography
+                className={
+                  currentPage === "shop" ? "headerActive" : "textHeader"
+                }
+                children="SHOP"
+              />
+            }
+            onClick={() => {
+              navigate("/shop");
+            }}
           />
           <Button
             size="small"
             variant="none"
             sx={{ padding: "0.5em" }}
-            children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'}children="CONTACT" />}
-            onClick={() => {navigate('/contact');}}
+            children={
+              <Typography
+                className={
+                  currentPage === "contact" ? "headerActive" : "textHeader"
+                }
+                children="CONTACT"
+              />
+            }
+            onClick={() => {
+              navigate("/contact");
+            }}
           />
         </Box>
       </Box>
       {/* */}
       <Box
         sx={{
-          display: "flex",
+          display: "inline-flex",
           alignItems: "center",
+          justifyContent: "flex-end",
         }}
       >
-        <Search visibility={visibility} tvisibility={toggleVisibility} />
-        <TextField
-          size="small"
-          color="none"
+        <Search
+          filter={filter}
+          setFilter={setFilter}
+          filteredData={filteredData}
+        />
+        <Box
           sx={{
-            cursor: "pointer",
-            transition: "0.5s",
             display: {
               xs: "flex",
               sm: "flex",
               md: "flex",
               lg: "none",
               xl: "none",
+              flexDirection: "column",
+              position: "relative",
             },
-            justifyContent: "end",
-            alignItems: "center",
           }}
-          label={<SearchIcon />}
-        />
+        >
+          <TextField
+            size="small"
+            color="none"
+            value={filter}
+            onChange={(event) => setFilter(event.target.value)}
+            sx={{
+              cursor: "pointer",
+              transition: "0.5s",
+              justifyContent: "end",
+              alignItems: "center",
+              width: "100%",
+            }}
+            label={<SearchIcon />}
+          />
+          {filter && (
+            <Paper
+              elevation={3}
+              sx={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                right: 0,
+                zIndex: 1,
+                bgcolor: "background.paper",
+              }}
+            >
+              {filteredData.map((item, id) => (
+                <ListFilter key={id} item={item} />
+              ))}
+            </Paper>
+          )}
+        </Box>
         <Box
           sx={{
             display: {
@@ -168,8 +229,17 @@ export const Header = ({ setUser, currentPage }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={<Typography className={currentPage === '/' ? 'headerActive': 'textHeader'} children="HOME" />}
-                  onClick={() => {navigate('/');}}
+                  children={
+                    <Typography
+                      className={
+                        currentPage === "/" ? "headerActive" : "textHeader"
+                      }
+                      children="HOME"
+                    />
+                  }
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 />
               }
             />
@@ -179,8 +249,17 @@ export const Header = ({ setUser, currentPage }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={<Typography className={currentPage === 'shop' ? 'headerActive': 'textHeader'} children="SHOP" />}
-                  onClick={() => {navigate('/shop');}}
+                  children={
+                    <Typography
+                      className={
+                        currentPage === "shop" ? "headerActive" : "textHeader"
+                      }
+                      children="SHOP"
+                    />
+                  }
+                  onClick={() => {
+                    navigate("/shop");
+                  }}
                 />
               }
             />
@@ -190,8 +269,19 @@ export const Header = ({ setUser, currentPage }) => {
                   size="small"
                   variant="none"
                   sx={{ padding: "0.5em" }}
-                  children={<Typography className={currentPage === 'contact' ? 'headerActive': 'textHeader'} children="CONTACT" />}
-                  onClick={() => {navigate('/contact');}}
+                  children={
+                    <Typography
+                      className={
+                        currentPage === "contact"
+                          ? "headerActive"
+                          : "textHeader"
+                      }
+                      children="CONTACT"
+                    />
+                  }
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
                 />
               }
             />
@@ -223,18 +313,27 @@ export const Header = ({ setUser, currentPage }) => {
               }
             />
             <MenuItem
-              onClick={() => alert("You must log-in first.")}
               children={
                 <IconButton
-                  children={<FavoriteIcon sx={{ color: "orange" }} />}
+                  children={<FavoriteIcon sx={{ color: "orange" }} 
+                  onClick={() => {
+                    setAlert({ message: "You must log-in first.", type: "error" })
+                    setTimeout(() => setAlert(null), 2000);
+                  }
+                  }
+                  />}
                 />
               }
             />
             <MenuItem
-              onClick={() => alert("You must log-in first.")}
               children={
                 <IconButton
-                  children={<ShoppingCartIcon sx={{ color: "orange" }} />}
+                  children={<ShoppingCartIcon sx={{ color: "orange" }} 
+                  onClick={() => {
+                    setAlert({ message: "You must log-in first.", type: "error" })
+                    setTimeout(() => setAlert(null), 2000);
+                  }
+                  }/>}
                 />
               }
             />
@@ -316,7 +415,11 @@ export const Header = ({ setUser, currentPage }) => {
           }
         />
         <IconButton
-          onClick={() => alert("You must log-in first.")}
+          onClick={() => {
+            setAlert({ message: "You must log-in first.", type: "error" })
+            setTimeout(() => setAlert(null), 2000);
+          }
+          }
           children={<FavoriteIcon sx={{ color: "orange" }} />}
           sx={{
             display: {
@@ -329,7 +432,11 @@ export const Header = ({ setUser, currentPage }) => {
           }}
         />
         <IconButton
-          onClick={() => alert("You must log-in first.")}
+          onClick={() => {
+            setAlert({ message: "You must log-in first.", type: "error" })
+            setTimeout(() => setAlert(null), 2000);
+          }
+          }
           children={
             <ShoppingCartIcon
               sx={{

@@ -5,7 +5,7 @@ import CartIndex from "../components/Cart/index.jsx";
 import { Divider, Container, CssBaseline, Box } from "@mui/material";
 import { Alert } from "../components/Error/Alert.jsx";
 
-export const Cart = ({ user, setUser, cart, alert, setAlert }) => {
+export const Cart = ({ user, setUser, cart, alert, setAlert, setCart, setFilter, filteredData, filter }) => {
   const [currentPage, setCurrentPage] = useState("cart");
   return (
     <Container
@@ -21,9 +21,13 @@ export const Cart = ({ user, setUser, cart, alert, setAlert }) => {
         setUser={setUser}
         cart={cart}
         currentPage={currentPage}
+        setAlert={setAlert}
+        setFilter={setFilter}
+        filteredData={filteredData}
+        filter={filter}
       />
       <Divider />
-      <CartIndex cart={cart} />
+      <CartIndex cart={cart} setCart={setCart} />
       <Divider />
       {alert ? (
         <Box

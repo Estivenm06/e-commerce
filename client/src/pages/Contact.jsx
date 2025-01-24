@@ -4,7 +4,7 @@ import Header from "../components/Header/index.jsx";
 import { Divider, Container, CssBaseline, Box } from "@mui/material";
 import { Alert } from "../components/Error/Alert.jsx";
 
-export const Contact = ({ user, setUser, cart, setAlert, alert }) => {
+export const Contact = ({ user, setUser, cart, setAlert, alert, filter, filteredData, setFilter }) => {
   const [currentPage, setCurrentPage] = useState("contact");
   return (
     <Container
@@ -20,6 +20,10 @@ export const Contact = ({ user, setUser, cart, setAlert, alert }) => {
         setUser={setUser}
         currentPage={currentPage}
         cart={cart}
+        filter={filter}
+        setFilter={setFilter}
+        filteredData={filteredData}
+        setAlert={setAlert}
       />
       <Divider />
       <Divider />

@@ -1,7 +1,18 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export const Left = () => {
+export const Left = ({setAlert, user}) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    setAlert({message: 'You must log-in first.', type: 'error'})
+    setTimeout(() => setAlert(null), 2000)
+  }
+  const handleClickLogged = () => {
+    setAlert({message: 'Enjoy your shopping.'})
+    setTimeout(() => setAlert(null), 2000)
+    navigate('/shop')
+  }
   return (
     <>
           <Typography variant="body1" color="#F53B2F">We are Ɲova</Typography>
@@ -14,6 +25,7 @@ export const Left = () => {
         </Typography>
         <Box>
           <Button
+            onClick={() => user ? handleClickLogged() : handleClick()}
             sx={{
               backgroundColor: "white",
               display: "flex",

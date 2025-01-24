@@ -10,6 +10,7 @@ import {
   Button,
   Badge,
   styled,
+  Paper,
 } from "@mui/material";
 import { badgeClasses } from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -19,8 +20,17 @@ import { Search } from "./utilsComponents/Search.jsx";
 import { logout } from "../../services/logout.js";
 import { useNavigate } from "react-router-dom";
 import { createOneCart } from "../../services/cart.js";
+import { ListFilter } from "./utilsComponents/ListFilter.jsx";
 
-export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
+export const HeaderLogged = ({
+  user,
+  setUser,
+  currentPage,
+  cart,
+  filter,
+  setFilter,
+  filteredData
+}) => {
   const [visibility, setVisibility] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -40,14 +50,11 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
     setUser(null);
     localStorage.removeItem("userLogged");
     localStorage.removeItem("userCart");
-    navigate('/')
+    navigate("/");
   };
 
   const handleCart = async () => {
-    const products = cart.map((item) => item);
-    await createOneCart(products);
     navigate("/cart");
-    localStorage.removeItem('userCart')
   };
 
   const CartBadge = styled(Badge)`
@@ -59,7 +66,7 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
 
   return (
     <>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", }}>
         {/*IMAGE LOGO*/}
         <img
           src={"../../resources/LOGO.webp"}
@@ -142,25 +149,42 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
           alignItems: "center",
         }}
       >
-        <Search visibility={visibility} tvisibility={toggleVisibility} />
-        <TextField
-          size="small"
-          color="none"
+        <Search
+          visibility={visibility}
+          tvisibility={toggleVisibility}
+          filter={filter}
+          setFilter={setFilter}
+          filteredData={filteredData}
+        />
+        <Box
           sx={{
-            cursor: "pointer",
-            transition: "0.5s",
             display: {
               xs: "flex",
               sm: "flex",
               md: "flex",
               lg: "none",
               xl: "none",
+              flexDirection: "column",
+              position: 'relative',
             },
-            justifyContent: "end",
-            alignItems: "center",
           }}
-          label={<SearchIcon />}
-        />
+        >
+          <TextField
+            size="small"
+            color="none"
+            value={filter}
+            onChange={(event) => setFilter(event.target.value)}
+            sx={{
+              cursor: "pointer",
+              transition: "0.5s",
+              justifyContent: "end",
+              alignItems: "center",
+              width: '100%'
+            }}
+            label={<SearchIcon />}
+          />
+          {filter && <Paper elevation={3} sx={{position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 1, bgcolor: 'background.paper'}}>{filteredData.map((item, id) => <ListFilter item={item} key={id}/>)}</Paper>}
+        </Box>
         <Avatar
           sx={{
             display: {
@@ -262,9 +286,7 @@ export const HeaderLogged = ({ user, setUser, currentPage, cart }) => {
             <MenuItem
               sx={{ display: currentPage === "cart" ? "none" : "flex" }}
               children={
-                <IconButton
-                  onClick={() => handleCart()}
-                >
+                <IconButton onClick={() => handleCart()}>
                   <ShoppingCartIcon sx={{ color: "orange" }} />
                   <CartBadge
                     badgeContent={cart?.length}

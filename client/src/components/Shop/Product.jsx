@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Rating, Box, Typography, Button } from "@mui/material";
-import { createOneCart } from "../../services/cart.js";
 
 const truncateTitle = (title) => {
   const keywords = title.split(/\s+/).slice(0, 3).join(" ");
   return keywords;
 };
 
-export const WindowMode = ({ item, user, setCart, handleAddToCart }) => {
+export const WindowMode = ({ item, user, setAlert, handleAddToCart }) => {
   
   return (
     <Box
@@ -63,14 +62,14 @@ export const WindowMode = ({ item, user, setCart, handleAddToCart }) => {
         <Button
         children="Add cart"
         variant="contained"
-        onClick={() => alert("You must log-in to do this.")}
+        onClick={() => {setAlert({message: 'You must log-in first.', type: 'error'}); setTimeout(() => setAlert(null), 2000)}}
         />
       )}
     </Box>
   );
 };
 
-export const ListMode = ({ item, user, setCart, handleAddToCart }) => {
+export const ListMode = ({ item, user, setAlert, handleAddToCart }) => {
 
   return (
     <Box
@@ -124,7 +123,7 @@ export const ListMode = ({ item, user, setCart, handleAddToCart }) => {
           <Button
             children="Add cart"
             variant="contained"
-            onClick={() => alert("You must log-in to do this.")}
+            onClick={() => {setAlert({message: 'You must log-in first.', type: 'error'}); setTimeout(() => setAlert(null), 2000)}}
           />
         )}
       </Box>

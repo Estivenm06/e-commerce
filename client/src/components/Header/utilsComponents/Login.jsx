@@ -37,6 +37,7 @@ export const Login = ({ checked, toggleChecked, setUser }) => {
           localStorage.setItem("userLogged", JSON.stringify(response));
           setUser(response)
           navigate('/')
+          window.location.reload()
         }
       }catch(error){
         setError(true)

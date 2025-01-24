@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import { Left } from "./LeftSide";
 import { Right } from "./RightSide";
 
-const Content = ({ products }) => {
+const Content = ({ products, setAlert, user }) => {
   if (!products || products.length === 0) return null;
   const mostRated = products.sort((a, b) => b.rating.rate - a.rating.rate).slice(0,1)
   return (
@@ -33,13 +33,13 @@ const Content = ({ products }) => {
               }
             }}
           >
-            <Left />
+            <Left setAlert={setAlert} user={user}/>
           </Box>
           <Box
             sx={{
               display: {
                 xs: "none",
-                sm: "flex",
+                sm: "none",
                 md: "flex",
                 lg: "flex",
                 xl: "flex",
