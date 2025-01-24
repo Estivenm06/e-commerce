@@ -3,9 +3,9 @@ import { Box, Divider, Typography, Button } from "@mui/material";
 
 export const Summary = ({cart}) => {
     const subtotal = cart.map(cartItem => cartItem.item.price)
-    const subtotal2 = subtotal.reduce((sum, a) => sum + a, 0)
+    const subtotal2 = Math.round(subtotal.reduce((sum, a) => sum + a, 0))
     const total = cart.map(cartItem => cartItem.item.price * cartItem.quantity)
-    const total2 = total.reduce((sum, a) => sum + a, 0) 
+    const total2 = Math.round(total.reduce((sum, a) => sum + a, 0) )
     return (
         <>
         <Typography children='Summary' color="white" variant="h5" sx={{fontWeight: 'bold', paddingBottom: '0.65em', alignItems: 'center'}}/>
