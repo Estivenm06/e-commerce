@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Summary } from "./Summary.jsx";
+import Grid from '@mui/material/Grid2'
 
 const Cart = ({ cart, setCart }) => {
   const [displayedCart, setDisplayedCart] = useState([]);
@@ -69,14 +70,15 @@ const Cart = ({ cart, setCart }) => {
 
   return (
     <Container maxWidth="lg" sx={{ my: "2em", py: "2em" }}>
-      <Box sx={{ display: "flex", paddingInline: "2em" }}>
+      <Box sx={{ display: "flex", paddingInline: "2em", flexDirection: {xs: 'column', sm: 'row'} }}>
         <Box
           sx={{
-            flex: "4",
+            flex: {xs: 1, md: '1.5'},
             padding: "2em",
             backgroundColor: "#575757",
             borderTopLeftRadius: "1em",
             borderBottomLeftRadius: "1em",
+            marginBottom: {sx: '2em', md: 0}
           }}
         >
           {loading ? (
@@ -111,13 +113,17 @@ const Cart = ({ cart, setCart }) => {
                   sx={{ color: "white", textAlign: "center" }}
                 />
               ) : (
-                displayedCart.map((item, id) => (
-                  <CardProduct
-                    item={item}
-                    key={id}
-                    handleDeleteItem={handleDeleteItem}
-                  />
-                ))
+                <Grid container spacing={2}>
+                {displayedCart.map((item, id) => (
+                  <Grid xs={12} md={4} key={id}>
+                    <CardProduct
+                      item={item}
+                      handleDeleteItem={handleDeleteItem}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+
               )}
               <Pagination
                 count={Math.ceil(cart.length / 3)}
@@ -134,7 +140,7 @@ const Cart = ({ cart, setCart }) => {
             </>
           )}
         </Box>
-        <Box sx={{ flex: "1", backgroundColor: "#3A3A3A", padding: "2em" }}>
+        <Box sx={{ flex: "1", backgroundColor: "#3A3A3A", padding: "2em", marginTop: {xs: '1em', sm: '0em'} }}>
           {cart.length === 0 ? (
             <Typography
               variant="h6"

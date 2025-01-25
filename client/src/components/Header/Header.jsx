@@ -315,19 +315,6 @@ export const Header = ({
             <MenuItem
               children={
                 <IconButton
-                  children={<FavoriteIcon sx={{ color: "orange" }} 
-                  onClick={() => {
-                    setAlert({ message: "You must log-in first.", type: "error" })
-                    setTimeout(() => setAlert(null), 2000);
-                  }
-                  }
-                  />}
-                />
-              }
-            />
-            <MenuItem
-              children={
-                <IconButton
                   children={<ShoppingCartIcon sx={{ color: "orange" }} 
                   onClick={() => {
                     setAlert({ message: "You must log-in first.", type: "error" })
@@ -413,23 +400,6 @@ export const Header = ({
               }}
             />
           }
-        />
-        <IconButton
-          onClick={() => {
-            setAlert({ message: "You must log-in first.", type: "error" })
-            setTimeout(() => setAlert(null), 2000);
-          }
-          }
-          children={<FavoriteIcon sx={{ color: "orange" }} />}
-          sx={{
-            display: {
-              xs: "none",
-              sm: "none",
-              md: "none",
-              lg: "flex",
-              xl: "flex",
-            },
-          }}
         />
         <IconButton
           onClick={() => {
