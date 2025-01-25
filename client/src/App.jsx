@@ -145,7 +145,6 @@ export const App = () => {
   }
 
   const filteredData = filter && products.filter(item => item.title.toLowerCase().includes(filter.toLocaleLowerCase())).slice(0, 2)
-  console.log(filteredData);
 
   return (
     <>

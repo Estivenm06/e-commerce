@@ -194,6 +194,10 @@ export const HeaderLogged = ({
               lg: "flex",
               xl: "flex",
             },
+            marginRight: {
+              lg: "0.5em",
+              xl: "0.5em",
+            },
           }}
         >
           {user.username.slice(0, 1)}
@@ -277,13 +281,6 @@ export const HeaderLogged = ({
               }
             />
             <MenuItem
-              children={
-                <IconButton
-                  children={<FavoriteIcon sx={{ color: "orange" }} />}
-                />
-              }
-            />
-            <MenuItem
               sx={{ display: currentPage === "cart" ? "none" : "flex" }}
               children={
                 <IconButton onClick={() => handleCart()}>
@@ -319,18 +316,6 @@ export const HeaderLogged = ({
           </Menu>
         </Box>
         <IconButton
-          children={<FavoriteIcon sx={{ color: "orange" }} />}
-          sx={{
-            display: {
-              xs: "none",
-              sm: "none",
-              md: "none",
-              lg: "block",
-              xl: "block",
-            },
-          }}
-        />
-        <IconButton
           sx={{
             marginRight: "1em",
             display: {
@@ -365,6 +350,7 @@ export const HeaderLogged = ({
             justifyContent: "center",
             alignItems: "center",
             marginBottom: "0.5em",
+            margin: 'auto'
           }}
           children={<Typography children="LOG OUT" variant="button" />}
           size="small"

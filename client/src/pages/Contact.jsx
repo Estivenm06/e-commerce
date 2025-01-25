@@ -3,6 +3,7 @@ import Menu from "../components/Menu/index.jsx";
 import Header from "../components/Header/index.jsx";
 import { Divider, Container, CssBaseline, Box } from "@mui/material";
 import { Alert } from "../components/Error/Alert.jsx";
+import ContactComponent from '../components/Contact/index.jsx'
 
 export const Contact = ({ user, setUser, cart, setAlert, alert, filter, filteredData, setFilter }) => {
   const [currentPage, setCurrentPage] = useState("contact");
@@ -26,6 +27,7 @@ export const Contact = ({ user, setUser, cart, setAlert, alert, filter, filtered
         setAlert={setAlert}
       />
       <Divider />
+      <ContactComponent setAlert={setAlert}/>
       <Divider />
       {alert ? (
         <Box
