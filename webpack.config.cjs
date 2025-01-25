@@ -1,9 +1,10 @@
 'use scric'
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',  
+  mode: 'production',  
   entry: "./client/index.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -16,16 +17,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        },
+        use: 'babel-loader',
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
@@ -34,36 +30,21 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader', options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'sass-loader', options: {
-              sourceMap: true
-            }
-          }
-        ]
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
-  },
-  devServer: {
-    port: 3000,
-    static: path.join(__dirname, "./dist"),
-    historyApiFallback: true,
-    proxy: {
-      '/api': 'http://localhost:3001'
-    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/index.html',
       filename: 'index.html', // Explicit filename
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    })
   ],
   resolve: {
     alias: {
