@@ -1,5 +1,7 @@
-const User = require("./user.js");
-const { sequelize } = require("../utils/config.js");
+'use scric';
+
+const User = require("./user.cjs");
+const { sequelize } = require("../utils/config.cjs");
 const { Model, DataTypes } = require("sequelize");
 
 class Cart extends Model {}

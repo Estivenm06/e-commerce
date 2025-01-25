@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getToken } from "../utils/middleware"
+import { getToken } from "../utils/middleware.js"
 const baseUrl = 'http://localhost:3001/api/carts'
 
 const token = getToken()

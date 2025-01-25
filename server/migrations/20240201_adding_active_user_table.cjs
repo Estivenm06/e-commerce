@@ -1,3 +1,5 @@
+'use scric';
+
 const {DataTypes} = require('sequelize')
 
 module.exports = {

@@ -1,8 +1,9 @@
+'use scric';
 const { SequelizeStorage, Umzug } = require("umzug");
-const { sequelize } = require("./config.js");
+const { sequelize } = require("./config.cjs");
 
 const migrationConf = {
-  migrations: { glob: "./server/migrations/*.js" },
+  migrations: { glob: "./server/migrations/*.cjs" },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
   logger: console,

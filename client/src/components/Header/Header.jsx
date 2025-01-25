@@ -18,6 +18,7 @@ import { Search } from "./utilsComponents/Search.jsx";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { ListFilter } from "./utilsComponents/ListFilter.jsx";
+import logo from './LOGO.webp'
 
 export const Header = ({
   setUser,
@@ -76,7 +77,7 @@ export const Header = ({
       <Box sx={{ display: "inline-flex", justifyContent: "flex-start" }}>
         {/*IMAGE LOGO */}
         <img
-          src={"../../resources/LOGO.webp"}
+          src={logo}
           alt="LOGO"
           style={{
             padding: "0.5em",

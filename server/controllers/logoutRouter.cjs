@@ -1,7 +1,9 @@
+'use scric';
+
 const router = require("express").Router();
-const { Active, User } = require("../models/index.js");
+const { Active, User } = require("../models/index.cjs");
 const jwt = require('jsonwebtoken')
-const {SECRET} = require('../utils/config.js')
+const {SECRET} = require('../utils/config.cjs')
 
 router.post("/", async (req, res) => {
   try {

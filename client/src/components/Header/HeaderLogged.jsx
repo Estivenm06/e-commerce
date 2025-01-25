@@ -20,6 +20,7 @@ import { logout } from "../../services/logout.js";
 import { useNavigate } from "react-router-dom";
 import { createOneCart } from "../../services/cart.js";
 import { ListFilter } from "./utilsComponents/ListFilter.jsx";
+import logo from './LOGO.webp'
 
 export const HeaderLogged = ({
   user,
@@ -68,7 +69,7 @@ export const HeaderLogged = ({
       <Box sx={{ display: "flex", }}>
         {/*IMAGE LOGO*/}
         <img
-          src={"../../resources/LOGO.webp"}
+          src={logo}
           alt="LOGO"
           style={{
             padding: "0.5em",

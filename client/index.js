@@ -1,4 +1,3 @@
-import("file-loader?name=[name].[ext]!../index.html");
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./src/App.jsx";

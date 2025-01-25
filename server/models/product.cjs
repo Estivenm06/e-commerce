@@ -1,5 +1,7 @@
+'use scric';
+
 const {Model, DataTypes} = require('sequelize')
-const {sequelize} = require('../utils/config.js')
+const {sequelize} = require('../utils/config.cjs')
 
 class Product extends Model {}
 Product.init({

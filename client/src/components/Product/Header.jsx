@@ -21,7 +21,7 @@ export const Header = ({ toggleFeature }) => {
       </Typography>
       <Typography variant="h3">Products Are on Sale</Typography>
       <Typography variant="subtitle1">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Take a look for these products.
       </Typography>
       <Grid
         container

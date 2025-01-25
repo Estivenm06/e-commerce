@@ -1,7 +1,9 @@
+'use scric';
+
 const { DataTypes } = require("sequelize");
-const { Product } = require("../models");
+const { Product } = require("../models/index.cjs");
 const axios = require("axios");
-const { API } = require("../utils/config.js");
+const { API } = require("../utils/config.cjs");
 
 const up = async ({ context: queryInterface }) => {
   await queryInterface.createTable("users", {

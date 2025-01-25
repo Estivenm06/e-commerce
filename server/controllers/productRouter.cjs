@@ -1,5 +1,7 @@
+'use scric';
+
 const router = require("express").Router();
-const { Product } = require("../models");
+const { Product } = require("../models/index.cjs");
 const { Op } = require("sequelize");
 
 router.get("/", async (req, res) => {

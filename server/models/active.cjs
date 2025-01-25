@@ -1,5 +1,7 @@
+'use scric';
+
 const { DataTypes, Model } = require("sequelize");
-const { sequelize } = require("../utils/config.js");
+const { sequelize } = require("../utils/config.cjs");
 
 class Active extends Model {}
 
