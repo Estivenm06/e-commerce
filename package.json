@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server/index.js",
+    "dev": "nodemon ./server/index.cjs",
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "eslint ."
@@ -47,6 +47,8 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.7",
@@ -57,6 +59,8 @@
     "file-loader": "^6.2.0",
     "formik": "^2.4.6",
     "globals": "^15.14.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
     "nodemon": "^3.1.9",
     "sass": "^1.83.0",
     "sass-loader": "^16.0.4",
@@ -66,6 +70,8 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0",
+    "webpack-hot-middleware": "^2.26.1",
+    "webpack-livereload-plugin": "^3.0.2",
     "yup": "^1.6.1"
   }
 }

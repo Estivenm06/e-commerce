@@ -1,7 +1,9 @@
+'use scric';
+
 const router = require("express").Router();
-const { Cart, User, Active } = require("../models");
+const { Cart, User, Active } = require("../models/index.cjs");
 const jwt = require('jsonwebtoken')
-const {SECRET} =require('../utils/config.js')
+const {SECRET} =require('../utils/config.cjs')
 
 router.get("/", async (req, res) => {
   try {

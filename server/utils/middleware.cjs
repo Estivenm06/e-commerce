@@ -1,5 +1,7 @@
+'use scric';
+
 const jwt = require('jsonwebtoken')
-const {SECRET} =require('./config.js')
+const {SECRET} =require('./config.cjs')
 
 const tokenExtractor = async (req, res, next) => {
     try{

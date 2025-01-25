@@ -1,8 +1,10 @@
+'use scric';
+
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
-const { User, Active } = require("../models");
+const { User, Active } = require("../models/index.cjs");
 const bcrypt = require("bcrypt");
-const { SECRET } = require("../utils/config.js");
+const { SECRET } = require("../utils/config.cjs");
 const schedule = require('node-schedule')
 const {jwtDecode} = require('jwt-decode')
 

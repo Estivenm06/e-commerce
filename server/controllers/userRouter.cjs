@@ -1,7 +1,9 @@
+'use scric';
+
 const router = require("express").Router();
-const { User, Active} = require("../models");
+const { User, Active} = require("../models/index.cjs");
 const bcrypt = require("bcrypt");
-const { tokenExtractor } = require("../utils/middleware.js");
+const { tokenExtractor } = require("../utils/middleware.cjs");
 
 router.get("/", async (req, res) => {
   try {
