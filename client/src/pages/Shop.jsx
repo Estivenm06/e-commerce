@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Menu from "../components/Menu/index.jsx";
 import Header from "../components/Header/index.jsx";
 import ShopIndex from "../components/Shop/index.jsx";

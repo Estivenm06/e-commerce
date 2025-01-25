@@ -13,7 +13,6 @@ import {
   Paper,
 } from "@mui/material";
 import { badgeClasses } from "@mui/material/Badge";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./utilsComponents/Search.jsx";

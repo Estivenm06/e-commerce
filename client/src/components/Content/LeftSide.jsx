@@ -27,7 +27,6 @@ export const Left = ({setAlert, user}) => {
           <Button
             onClick={() => user ? handleClickLogged() : handleClick()}
             sx={{
-              backgroundColor: "white",
               display: "flex",
               padding: "1em",
               paddingInline: "3.5em",

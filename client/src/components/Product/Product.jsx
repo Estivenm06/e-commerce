@@ -38,7 +38,7 @@ export const Product = ({ products, feature }) => {
 
   const filteredProducts = getFilteredProducts(feature);
   if (!filteredProducts || filteredProducts.length === 0) {
-    return <Typography>"No products found for this category"</Typography>;
+    return <Typography>No products found for this category</Typography>;
   }
 
   const truncateTitle = (title) => {

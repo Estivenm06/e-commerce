@@ -10,7 +10,6 @@ import {
   Paper,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Login } from "./utilsComponents/Login.jsx";
 import { Register } from "./utilsComponents/Register.jsx";

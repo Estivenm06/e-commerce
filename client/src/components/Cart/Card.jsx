@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardContent, CardMedia, IconButton, Typography, Pagination, PaginationItem } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const CardProduct = ({item, handleDeleteItem}) => {

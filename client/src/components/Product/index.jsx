@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Header } from "./Header";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { Product } from "./Product";
 
 const Index = ({ products }) => {

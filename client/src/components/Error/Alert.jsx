@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert as AlertUI, Box, AlertTitle } from "@mui/material";
+import { Alert as AlertUI, AlertTitle } from "@mui/material";
 import { Check, Error as ErrorIcon } from "@mui/icons-material";
 
 const Success = ({success}) => {

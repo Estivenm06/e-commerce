@@ -1,4 +1,4 @@
-import { Typography, Divider, Box } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import PlaceIcon from "@mui/icons-material/Place";

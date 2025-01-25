@@ -17,7 +17,7 @@ export const Header = ({ toggleFeature }) => {
       }}
     >
       <Typography variant="overline" color="#F53B2F">
-        Get Your's One
+        Get Yours One
       </Typography>
       <Typography variant="h3">Products Are on Sale</Typography>
       <Typography variant="subtitle1">
