@@ -20,9 +20,10 @@ const runMigration = async () => {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
-    await runMigration();
+    await runMigration()
     console.log("You have been successfully connected to the database.");
   } catch (error) {
+    console.log(error);
     console.log("A error has occurred trying to connect to the database.");
     return process.exit(1);
   }

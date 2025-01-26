@@ -85,6 +85,22 @@ const up = async ({ context: queryInterface }) => {
       type: DataTypes.JSON,
     },
   });
+    await queryInterface.createTable('actives', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {model: 'users', key: 'id'}
+        },
+        active: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        }
+    });
   try {
       const { data } = await axios.get(`${API}/products`);
       await Product.bulkCreate(data.map(({ id, ...product }) => product));
@@ -99,6 +115,7 @@ const down = async ({ context: queryInterface }) => {
   await queryInterface.dropTable("users");
   await queryInterface.dropTable("products");
   await queryInterface.dropTable("carts");
+  await queryInterface.dropTable('actives')
   try {
     await Product.destroy({ where: {} });
     console.log("Products successfully removed from the database");
