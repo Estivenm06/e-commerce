@@ -1,6 +1,6 @@
 import axios from "axios"
 import { getToken } from "../utils/middleware.js"
-const baseUrl = 'http://localhost:3001/api/carts'
+const baseUrl = 'https://e-commerce-x5pg.onrender.com/api/carts'
 
 const token = getToken()
 

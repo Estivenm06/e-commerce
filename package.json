@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server/index.cjs",
+    "start": "node ./server/index.cjs",
     "build": "webpack --mode production",
     "lint": "eslint ."
   },

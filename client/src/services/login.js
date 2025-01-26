@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/login'
+const baseUrl = 'https://e-commerce-x5pg.onrender.com/api/login'
 
 export const login = async ({credentials}) => {
     const request = await axios.post(baseUrl, credentials)

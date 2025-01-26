@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/logout'
+const baseUrl = 'https://e-commerce-x5pg.onrender.com/api/logout'
 
 const getToken = () => {
     try {
