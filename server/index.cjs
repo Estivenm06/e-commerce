@@ -28,20 +28,55 @@ app.use('/api/carts', cartRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/logout', logoutRouter)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+if(process.env.NODE_ENV === "production"){
+  console.log("Production");
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+  
+  const startServer = async () => {
+    try {
+      await connectToDatabase();
+      app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+      });
+    } catch (error) {
+      console.error("Error starting server:", error);
+    }
+  };
+  
+  startServer();
+}else {
+  console.log("Development");
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
+  const webpackConfig = require('../webpack.config.cjs')
+  
+  const compiler = webpack(webpackConfig)
 
-const startServer = async () => {
-  try {
-    await connectToDatabase();
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error("Error starting server:", error);
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath
+  }))
+
+  app.use(webpackHotMiddleware(compiler))
+
+  compiler.hooks.done.tap('StartServer', () => {
+    app.get('*', (req,res) => {
+      res.sendFile(path.join(__dirname, '../dist/index.html'))
+    })
+  })
+
+  const startServer = () => {
+    try {
+      connectToDatabase()
+      app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`)
+      })
+    }catch(error){
+      console.log(error);
+    }
   }
-};
 
-startServer();
-
+  startServer()
+}
