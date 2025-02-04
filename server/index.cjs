@@ -51,7 +51,7 @@ if(process.env.NODE_ENV === "production"){
   const webpack = require('webpack')
   const webpackDevMiddleware = require('webpack-dev-middleware')
   const webpackHotMiddleware = require('webpack-hot-middleware')
-  const webpackConfig = require('../webpack.config.cjs')
+  const webpackConfig = require('../webpack.dev.cjs')
   
   const compiler = webpack(webpackConfig)
 

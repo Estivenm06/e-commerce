@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./LOGO.webp";
-import { MenuSmall } from "./utilsComponents/menuSmallScreen";
-import { MenuLarge } from "./utilsComponents/menuLargeScreen";
+import { MenuSmall } from "./utilsComponents/MenuSmallScreen";
+import { MenuLarge } from "./utilsComponents/MenuLargeScreen";
 import { Box } from "@mui/material";
 
 export const Header = ({

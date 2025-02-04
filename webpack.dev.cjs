@@ -9,7 +9,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     port: 3000,
-    static: path.join(__dirname, '/dist'),
+    static: path.join(__dirname, './dist'),
     historyApiFallback: true,
     proxy: [
       {

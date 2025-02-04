@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "./Search.jsx";
 import { ListFilter } from "./ListFilter.jsx";
 // Services
-import { createOneCart } from "../../../services/cart";
+import { createOneCart } from "../../../services/cart.js";
 import { logout } from "../../../services/logout.js";
 
 export const MenuSmallLogged = ({
