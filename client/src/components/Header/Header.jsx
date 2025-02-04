@@ -33,6 +33,7 @@ export const Header = ({
     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
       {/* */}
       <MenuSmall
+        currentPage={currentPage}
         setAlert={setAlert}
         filter={filter}
         setFilter={setFilter}

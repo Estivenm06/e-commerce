@@ -52,6 +52,7 @@ module.exports = {
       "@src": path.resolve(__dirname, "./client/src"),
       "@components": path.resolve(__dirname, "./client/src/components"),
       "@styles": path.resolve(__dirname, "./client/src/styles"),
+      "@utilComponents": path.resolve(__dirname, "./client/src/components/Header/utilComponents")
     },
     extensions: [".js", ".jsx"],
   },
