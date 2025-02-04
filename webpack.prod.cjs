@@ -13,29 +13,3 @@ module.exports = merge(common, {
       ]
     }
 })
-
-/*
-module.exports = {
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: "babel-loader",
-        },
-        {
-          test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
-        },
-        {
-          test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
-  s        type: "asset/resource",
-        },
-        {
-          test: /\.scss$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-        },
-      ],
-    },
-};
-*/
