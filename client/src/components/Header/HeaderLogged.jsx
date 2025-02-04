@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./LOGO.webp";
-import { MenuSmallLogged } from "./utilsComponents/MenuSmallLogged.jsx";
-import { MenuLarge } from "./utilsComponents/MenuLargeScreen.jsx";
+import { MenuSmallLogged } from "./MenuSmallLogged.jsx";
+import { MenuLarge } from "./MenuLargeScreen.jsx";
 import { Box } from "@mui/material";
 
 export const HeaderLogged = ({

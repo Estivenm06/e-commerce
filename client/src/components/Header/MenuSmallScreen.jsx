@@ -17,10 +17,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 // Components
-import { ListFilter } from "./ListFilter.jsx";
-import { Search } from "./Search.jsx";
-import { Register } from "./Register.jsx";
-import { Login } from "./Login.jsx";
+import { ListFilter } from "./utilsComponents/ListFilter.jsx";
+import { Search } from "./utilsComponents/Search.jsx";
+import { Register } from "./utilsComponents/Register.jsx";
+import { Login } from "./utilsComponents/Login.jsx";
 
 export const MenuSmall = ({
   setAlert,

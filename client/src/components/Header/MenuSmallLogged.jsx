@@ -19,11 +19,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 // React-Router-Dom
 import { useNavigate } from "react-router-dom";
 //Components
-import { Search } from "./Search.jsx";
-import { ListFilter } from "./ListFilter.jsx";
+import { Search } from "./utilsComponents/Search.jsx";
+import { ListFilter } from "./utilsComponents/ListFilter.jsx";
 // Services
-import { createOneCart } from "../../../services/cart.js";
-import { logout } from "../../../services/logout.js";
+import { createOneCart } from "../../services/cart.js";
+import { logout } from "../../services/logout.js";
 
 export const MenuSmallLogged = ({
   currentPage,
