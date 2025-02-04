@@ -17,6 +17,7 @@ const ShopIndex = ({ products, user, setCart, cart, handleAddToCart, setAlert}) 
 
   const handleRadioChangeSort = (event) => {
     setValueSort(event.target.value)
+    setCurrentPage(1)
   }
 
   const openSort = Boolean(anchorElSort)
@@ -31,6 +32,7 @@ const ShopIndex = ({ products, user, setCart, cart, handleAddToCart, setAlert}) 
 
   const handleRadioChangeFilter = (event) => {
     setValueFilter(event.target.value)
+    setCurrentPage(1)
   }
 
 

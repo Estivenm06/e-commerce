@@ -19,9 +19,9 @@ export const Search = ({ filter, setFilter, filteredData }) => {
             md: "none",
             lg: "flex",
             xl: "flex",
-            flexDirection: "column",
-            position: 'relative',
           },
+          position: 'relative',
+          flexDirection: "column",
         }}
         >
           <TextField

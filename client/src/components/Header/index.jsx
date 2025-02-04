@@ -7,23 +7,15 @@ const Index = ({ user, setUser, currentPage, cart, setAlert, filter, setFilter, 
   return (
     <Container
       sx={{
+        display: 'flex',
         p: 3,
-        display: "flex",
         justifyContent: 'center',
-        alignItems: 'center',
-        margin: 'auto'
+        alignItems: 'center'
       }}
-      maxWidth="xl"
+      maxWidth={false}
       disableGutters
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: {sx: '100%', sm: '95%', md: '85%', lg: '80%', xl: '70%'}
-        }}
-        >
+      <Box sx={{display: 'inline-flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: {xs: '100%', sm: '85%', md: '85%', lg: '80%', xl:'65%'}}}>
           {user?.username ? <HeaderLogged user={user} setUser={setUser} currentPage={currentPage} cart={cart} setAlert={setAlert} filter={filter} setFilter={setFilter} filteredData={filteredData} /> : <Header filteredData={filteredData} setUser={setUser} currentPage={currentPage} setAlert={setAlert} filter={filter} setFilter={setFilter} />}
       </Box>
     </Container>

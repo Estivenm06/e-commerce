@@ -44,12 +44,14 @@ export const Products = ({
 
   const styleList = {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     paddingInline: '2em',
     flexWrap: 'wrap',
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: '2em',
+    padding: '1.5em'
   }
 
   return (

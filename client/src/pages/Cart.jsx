@@ -27,7 +27,7 @@ export const Cart = ({ user, setUser, cart, alert, setAlert, setCart, setFilter,
         filter={filter}
       />
       <Divider />
-      <CartIndex cart={cart} setCart={setCart} />
+      <CartIndex cart={cart} setCart={setCart} setAlert={setAlert}/>
       <Divider />
       {alert ? (
         <Box

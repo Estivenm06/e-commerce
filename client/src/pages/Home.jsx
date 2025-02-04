@@ -12,8 +12,8 @@ export const Home = ({ products, setUser, user, cart, alert, setAlert, filter, s
     <Container
       maxWidth={false}
       disableGutters
-      sx={{ display: "flex", overflow: "hidden", flexDirection: "column" }}
     >
+      <Box sx={{display: 'flex', justifyContent: 'center', flexDirection: 'column', overflow: 'hidden'}}>
       <CssBaseline />
       <Menu />
       <Divider />
@@ -47,6 +47,7 @@ export const Home = ({ products, setUser, user, cart, alert, setAlert, filter, s
           <Alert alert={alert} />
         </Box>
       ) : null}
+      </Box>
     </Container>
   );
 };

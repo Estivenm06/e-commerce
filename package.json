@@ -8,11 +8,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production && node ./server/index.cjs",
+    "start": "cross-env NODE_ENV=production node ./server/index.cjs",
     "build": "webpack --mode production",
     "lint": "eslint .",
-    "dev": "cross-env NODE_ENV=development nodemon ./server/index.cjs",
-    "start:webpack": "webpack serve"
+    "dev": "cross-env NODE_ENV=development webpack serve --open --config webpack.dev.cjs",
+    "start:webpack": "webpack serve --config webpack.prod.cjs"
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
@@ -73,6 +73,7 @@
     "webpack-dev-server": "^5.2.0",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-livereload-plugin": "^3.0.2",
+    "webpack-merge": "^6.0.1",
     "yup": "^1.6.1"
   }
 }

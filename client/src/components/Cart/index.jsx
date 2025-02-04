@@ -12,7 +12,7 @@ import {
 import { Summary } from "./Summary.jsx";
 import Grid from '@mui/material/Grid2'
 
-const Cart = ({ cart, setCart }) => {
+const Cart = ({ cart, setCart, setAlert }) => {
   const [displayedCart, setDisplayedCart] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,7 +70,7 @@ const Cart = ({ cart, setCart }) => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ my: "2em", py: "2em" }}>
+    <Container maxWidth={false} sx={{ my: "2em", py: "2em" }}>
       <Box sx={{ display: "flex", paddingInline: "2em", flexDirection: {xs: 'column', sm: 'row'} }}>
         <Box
           sx={{
@@ -149,7 +149,7 @@ const Cart = ({ cart, setCart }) => {
               sx={{ color: "white", textAlign: "center" }}
             />
           ) : (
-            <Summary cart={cart} displayed />
+            <Summary cart={cart} displayed setAlert={setAlert} setCart={setCart} />
           )}
         </Box>
       </Box>

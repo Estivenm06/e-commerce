@@ -9,14 +9,14 @@ const Content = ({ products, setAlert, user }) => {
   const mostRated = products.sort((a, b) => b.rating.rate - a.rating.rate).slice(0,1)
   return (
     <Container
-      maxWidth='xl'
+      maxWidth={false}
       disableGutters
       sx={{ py: 4, backgroundColor: "#FFF5DA", alignItems: 'center' }}
     >
       <Grid
         container
       >
-        <Grid sx={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-evenly'}}>
+        <Grid sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <Box
             sx={{
               display: "flex",

@@ -1,11 +1,18 @@
 import React from "react";
 import { Box, Divider, Typography, Button } from "@mui/material";
 
-export const Summary = ({cart}) => {
+export const Summary = ({cart, setAlert, setCart}) => {
     const subtotal = cart.map(cartItem => cartItem.item.price)
     const subtotal2 = Math.round(subtotal.reduce((sum, a) => sum + a, 0))
     const total = cart.map(cartItem => cartItem.item.price * cartItem.quantity)
     const total2 = Math.round(total.reduce((sum, a) => sum + a, 0) )
+
+    const handleClick = () => {
+        setCart([])
+        localStorage.removeItem('userCart')
+        setAlert({message: 'Thank for shopping with us.', type: 'success'})
+        setTimeout(() => setAlert(null), 2000)
+    }
     return (
         <>
         <Typography children='Summary' color="white" variant="h5" sx={{fontWeight: 'bold', paddingBottom: '0.65em', alignItems: 'center'}}/>
@@ -28,7 +35,7 @@ export const Summary = ({cart}) => {
             <Typography children={`TOTAL AMOUNT`} variant="subtitle2" sx={{fontWeight: 'bold'}} fontSize={'small'}  />
             <Typography children={`$${total2}`} variant="subtitle2" sx={{fontWeight: 'bold'}} fontSize={'small'}  />
             </Box>
-            <Button children={<Typography children='GO TO CHECKOUT' variant="button" fontSize={'small'} fontWeight={'bold'}/>} variant="contained" sx={{py: '0.7em'}}></Button>
+            <Button children={<Typography children='GO TO CHECKOUT' variant="button" fontSize={'small'} fontWeight={'bold'}/>} variant="contained" sx={{py: '0.7em'}} onClick={() => handleClick()}  />
         </Box>
         </>
     )

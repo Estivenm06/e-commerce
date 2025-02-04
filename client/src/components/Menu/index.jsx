@@ -7,18 +7,18 @@ const Menu = () => {
   return (
     <Container
       sx={{
-        p: 1,
-        display: "flex",
-        justifyContent: 'space-around',
+        p: 0.5,
       }}
-      maxWidth='xl'
+      maxWidth={false}
       disableGutters
     >
-      <Box sx={{display: 'flex', gap: '0.7em', alignItems: 'center'}}>
+      <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+      <Box sx={{display: 'flex', gap: '0.4em', alignItems: 'center'}}>
         <Left />
       </Box>
       <Box sx={{display: {xs: 'none', sm: 'flex', md: 'flex', lg: 'flex', xl: 'flex'}}}>
         <Right />
+      </Box>
       </Box>
     </Container>
   );
