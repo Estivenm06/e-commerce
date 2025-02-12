@@ -12,7 +12,6 @@ import { Home } from "./pages/Home.jsx";
 import { Shop } from "./pages/Shop.jsx";
 import { Contact } from "./pages/Contact.jsx";
 import { Cart } from "./pages/Cart.jsx";
-import "./styles/index.scss";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { deleteOneCart } from "./services/cart.js";
 import { isEqual } from "lodash";

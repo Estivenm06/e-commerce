@@ -3,10 +3,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: {
+    bundle: "./client/index.js"
+  },
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "index.bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
     clean: true,
     publicPath: "/",
   },
@@ -17,9 +19,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Production",
-      template: "./client/index.html",
+      title: "Ɲova Market",
+      template: "./index.html",
       filename: "index.html",
+      open: true,
+      favicon: "./client/src/components/Header/LOGO.webp"
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
@@ -43,8 +47,13 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
-        type: "asset/resource",
+        use: ["file-loader"]
       },
+      {
+        test: /\.s[ca]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+        exclude: /node_modules/
+      }
     ],
   },
   resolve: {

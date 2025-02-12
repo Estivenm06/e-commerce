@@ -11,7 +11,7 @@
     "start": "cross-env NODE_ENV=production node ./server/index.cjs",
     "build": "webpack --config webpack.prod.cjs --mode production",
     "lint": "eslint .",
-    "dev": "cross-env NODE_ENV=development webpack serve --open --config webpack.dev.cjs"
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack.dev.cjs"
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
@@ -62,7 +62,7 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "nodemon": "^3.1.9",
-    "sass": "^1.83.0",
+    "sass": "^1.84.0",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
     "url-loader": "^4.1.1",

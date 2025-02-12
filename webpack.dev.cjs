@@ -9,7 +9,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     port: 3000,
-    static: path.join(__dirname, './dist'),
+    static: path.resolve(__dirname, 'dist'),
     historyApiFallback: true,
     proxy: [
       {
@@ -18,28 +18,4 @@ module.exports = merge(common, {
       }
     ]
   },
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
-    ]
-  }
 })
