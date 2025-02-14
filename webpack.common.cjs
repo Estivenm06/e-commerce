@@ -1,6 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -17,18 +15,6 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Ɲova Market",
-      template: "./index.html",
-      filename: "index.html",
-      open: true,
-      favicon: "./client/src/components/Header/LOGO.webp"
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-  ],
   module: {
     rules: [
       {
@@ -42,17 +28,8 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
         test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
-        use: ["file-loader"]
-      },
-      {
-        test: /\.s[ca]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
-        exclude: /node_modules/
+        use: ['file-loader?name=[name].[ext]'],
       }
     ],
   },
