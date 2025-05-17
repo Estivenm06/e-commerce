@@ -59,7 +59,7 @@ export const App = () => {
         JSON.stringify([...cart, { item, quantity: 1 }])
       );
       setAlert({
-        message: "You have been insert this product.",
+        message: "You have been inserted this product.",
         type: "success",
       });
       setTimeout(() => setAlert(null), 2000);

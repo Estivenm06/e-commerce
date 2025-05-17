@@ -30,7 +30,7 @@ const Phone = ({ label }) => {
 };
 export const Left = () => {
   return (
-    <>
+    <div className="flex flex-row gap-4 align-middle">
       <Typography
         variant="caption"
         sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'}}}
@@ -48,6 +48,6 @@ export const Left = () => {
         sx={{ display: "flex", justifyContent: "center", fontSize: {sx: '0.7em', sm: 'small'} }}
         children={<Location label="Location" />}
       />
-    </>
+    </div>
   );
 };

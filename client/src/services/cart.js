@@ -11,6 +11,7 @@ export const getAllCart = async (id) => {
 
 export const createOneCart = async (products) => {
     const request = await axios.post(baseUrl, {products: products}, {headers: {'Authorization': token}})
+    
     return request.data
 }
 

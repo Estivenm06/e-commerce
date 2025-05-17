@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Summary } from "./Summary.jsx";
-import Grid from '@mui/material/Grid2'
+import Grid from '@mui/material/Grid'
 
 const Cart = ({ cart, setCart, setAlert }) => {
   const [displayedCart, setDisplayedCart] = useState([]);

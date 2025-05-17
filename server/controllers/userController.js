@@ -30,9 +30,10 @@ const userPost = (async (req, res) => {
 });
 
 const userUpdate = (async (req, res) => {
-  const { id, ...body } = req;
+  const {id} = req.params;
+  const { ...body } = req;
   try {
-    const user = await User.findByPk(req.decodedToken.id);
+    const user = await User.findByPk(id);
     const isActive = await Active.findOne({ where: { userId: user.id } });
     if (!isActive) {
       return res.status(401).json({ error: "This user is not active." });
@@ -51,8 +52,9 @@ const userUpdate = (async (req, res) => {
 });
 
 const userDelete = ( async (req, res) => {
+  const {id} = req.params;
   try {
-    const user = await User.findByPk(req.decodedToken.id);
+    const user = await User.findByPk(id);
     const isActive = await Active.findOne({ where: { userId: user.id } });
     if (!isActive) {
       return res.status(401).json({ error: "This user is not active." });

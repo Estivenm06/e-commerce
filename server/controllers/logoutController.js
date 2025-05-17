@@ -11,6 +11,8 @@ const logoutUser = (async (req, res) => {
       return res.status(400).json({ error: "This user is not active." });
     }
     await active.destroy();
+    console.log('You have been log out successfully');
+    
     return res.json("You have been log out successfully.");
   } catch {
     return res
