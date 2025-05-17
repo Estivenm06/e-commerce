@@ -16,18 +16,14 @@ if(process.env.NODE_ENV === 'development'){
       password: process.env.PASS,
       host: 'localhost',
       port: 5432,
-      ssl: true,
+      schema: 'public'
   })
 }else{
   sequelize = new Sequelize(DB, {
       dialect: "postgres",
       dialectModule: pg,
-      dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
-      },
+      ssl: true,
+      schema: 'public'
     });
 }
 
