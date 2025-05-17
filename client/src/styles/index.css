@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@use "./header.css";
+@use "./content.css";
+
+/* * {
+  margin: 0;
+  padding: 0;
+} */

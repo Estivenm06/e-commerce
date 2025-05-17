@@ -1,7 +1,5 @@
-'use scric';
-
-const { Model, DataTypes } = require("sequelize");
-const {sequelize} = require('../utils/config.cjs')
+import {Model, DataTypes} from 'sequelize';
+import {sequelize} from '../utils/config.js';
 
 class User extends Model {}
 User.init(
@@ -43,4 +41,4 @@ User.init(
   }
 );
 
-module.exports = User;
+export default User;

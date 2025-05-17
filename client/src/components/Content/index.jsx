@@ -5,7 +5,7 @@ import { Left } from "./LeftSide";
 import { Right } from "./RightSide";
 
 const Content = ({ products, setAlert, user }) => {
-  if (!products || products.length === 0) return null;
+  if (!products || products.length === 0) return;
   const mostRated = products.sort((a, b) => b.rating.rate - a.rating.rate).slice(0,1)
   return (
     <Container

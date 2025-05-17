@@ -1,6 +1,5 @@
-'use scric';
-const { SequelizeStorage, Umzug } = require("umzug");
-const { sequelize } = require("./config.cjs");
+import { Umzug, SequelizeStorage } from "umzug";
+import { sequelize } from "./config.js";
 
 const migrationConf = {
   migrations: { glob: "./server/migrations/*.cjs" },
@@ -20,7 +19,7 @@ const runMigration = async () => {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
-    await runMigration()
+    await runMigration();
     console.log("You have been successfully connected to the database.");
   } catch (error) {
     console.log(error);
@@ -29,4 +28,4 @@ const connectToDatabase = async () => {
   }
 };
 
-module.exports = { connectToDatabase };
+export { connectToDatabase };

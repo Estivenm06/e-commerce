@@ -1,7 +1,5 @@
-'use scric';
-
-const jwt = require('jsonwebtoken')
-const {SECRET} =require('./config.cjs')
+import jwt from 'jsonwebtoken';
+import { SECRET } from './config.js';
 
 const tokenExtractor = async (req, res, next) => {
     try{
@@ -20,4 +18,6 @@ const tokenExtractor = async (req, res, next) => {
     }
 }
 
-module.exports = {tokenExtractor}
+export {
+    tokenExtractor
+}

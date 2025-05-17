@@ -1,11 +1,7 @@
-'use scric';
+import bcrypt from "bcrypt";
+import { User, Active } from "../models/index.js";
 
-const router = require("express").Router();
-const { User, Active} = require("../models/index.cjs");
-const bcrypt = require("bcrypt");
-const { tokenExtractor } = require("../utils/middleware.cjs");
-
-router.get("/", async (req, res) => {
+const userGet = ( async (req, res) => {
   try {
     const users = await User.findAll();
     return res.json(users);
@@ -16,11 +12,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+const userPost = (async (req, res) => {
+  const { password, ...body } = req.body;
+  let user;
+  const saltRounds = 10;
   try {
-    const { password, ...body } = req.body;
-    let user;
-    const saltRounds = 10;
     const hash = await bcrypt.hash(password, saltRounds);
     user = body;
     user.passwordHash = hash;
@@ -33,13 +29,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", tokenExtractor, async (req, res) => {
+const userUpdate = (async (req, res) => {
+  const { id, ...body } = req;
   try {
-    const { id, ...body } = req;
     const user = await User.findByPk(req.decodedToken.id);
-    const isActive = await Active.findOne({where: {userId: user.id}})
-    if(!isActive){
-      return res.status(401).json({error: 'This user is not active.'})
+    const isActive = await Active.findOne({ where: { userId: user.id } });
+    if (!isActive) {
+      return res.status(401).json({ error: "This user is not active." });
     }
     if (!user) {
       return res.status(401).json({ error: "User not found it." });
@@ -54,12 +50,12 @@ router.put("/:id", tokenExtractor, async (req, res) => {
   }
 });
 
-router.delete("/:id", tokenExtractor, async (req, res) => {
+const userDelete = ( async (req, res) => {
   try {
     const user = await User.findByPk(req.decodedToken.id);
-    const isActive = await Active.findOne({where: {userId: user.id}})
-    if(!isActive){
-      return res.status(401).json({error: 'This user is not active.'})
+    const isActive = await Active.findOne({ where: { userId: user.id } });
+    if (!isActive) {
+      return res.status(401).json({ error: "This user is not active." });
     }
     if (!user) {
       return res.status(401).json({ error: "User not found it." });
@@ -73,4 +69,9 @@ router.delete("/:id", tokenExtractor, async (req, res) => {
   }
 });
 
-module.exports = router;
+export {
+  userGet,
+  userPost,
+  userUpdate,
+  userDelete
+}

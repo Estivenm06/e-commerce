@@ -1,8 +1,6 @@
-'use scric';
-
-const User = require("./user.cjs");
-const { sequelize } = require("../utils/config.cjs");
-const { Model, DataTypes } = require("sequelize");
+import { Model, DataTypes } from "sequelize";
+import User from "./user.js";
+import {sequelize} from '../utils/config.js';
 
 class Cart extends Model {}
 Cart.init(
@@ -34,4 +32,4 @@ Cart.init(
   }
 );
 
-module.exports = Cart;
+export default Cart

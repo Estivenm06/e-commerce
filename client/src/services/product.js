@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://e-commerce-x5pg.onrender.com/api/products'
+const baseUrl = '/api/products'
 
 const token = ''
 
